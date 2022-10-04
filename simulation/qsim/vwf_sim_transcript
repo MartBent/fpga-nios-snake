@@ -1,0 +1,169 @@
+Determining the location of the ModelSim executable...
+
+Using: /opt/intelFPGA/20.1/modelsim_ase/bin
+
+To specify a ModelSim executable directory, select: Tools -> Options -> EDA Tool Options
+Note: if both Questa Intel FPGA Edition and ModelSim executables are available, Questa Intel FPGA Edition will be used.
+
+**** Generating the ModelSim Testbench ****
+
+quartus_eda --gen_testbench --tool=modelsim_oem --format=vhdl --write_settings_files=off NiosDisplay -c NiosDisplay --vector_source="/home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/Waveform1.vwf" --testbench_file="/home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/simulation/qsim/Waveform1.vwf.vht"
+
+Info: *******************************************************************Info: Running Quartus Prime EDA Netlist Writer    Info: Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition    Info: Copyright (C) 2021  Intel Corporation. All rights reserved.    Info: Your use of Intel Corporation's design tools, logic functions     Info: and other software and tools, and any partner logic     Info: functions, and any output files from any of the foregoing     Info: (including device programming or simulation files), and any     Info: associated documentation or information are expressly subject     Info: to the terms and conditions of the Intel Program License     Info: Subscription Agreement, the Intel Quartus Prime License Agreement,    Info: the Intel FPGA IP License Agreement, or other applicable license    Info: agreement, including, without limitation, that your use is for    Info: the sole purpose of programming logic devices manufactured by    Info: Intel and sold by Intel or its authorized distributors.  Please    Info: refer to the applicable agreement for further details, at    Info: https://fpgasoftware.intel.com/eula.    Info: Processing started: Tue Sep 20 13:11:44 2022Info: Command: quartus_eda --gen_testbench --tool=modelsim_oem --format=vhdl --write_settings_files=off NiosDisplay -c NiosDisplay --vector_source=/home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/Waveform1.vwf --testbench_file=/home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/simulation/qsim/Waveform1.vwf.vhtWarning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+put pin "R_external[7]" in vector source file when writing test bench files
+Completed successfully. 
+
+**** Generating the functional simulation netlist ****
+
+quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=vhdl --output_directory="/home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/simulation/qsim/" NiosDisplay -c NiosDisplay
+
+Info: *******************************************************************Info: Running Quartus Prime EDA Netlist Writer    Info: Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition    Info: Copyright (C) 2021  Intel Corporation. All rights reserved.    Info: Your use of Intel Corporation's design tools, logic functions     Info: and other software and tools, and any partner logic     Info: functions, and any output files from any of the foregoing     Info: (including device programming or simulation files), and any     Info: associated documentation or information are expressly subject     Info: to the terms and conditions of the Intel Program License     Info: Subscription Agreement, the Intel Quartus Prime License Agreement,    Info: the Intel FPGA IP License Agreement, or other applicable license    Info: agreement, including, without limitation, that your use is for    Info: the sole purpose of programming logic devices manufactured by    Info: Intel and sold by Intel or its authorized distributors.  Please    Info: refer to the applicable agreement for further details, at    Info: https://fpgasoftware.intel.com/eula.    Info: Processing started: Tue Sep 20 13:11:46 2022Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=vhdl --output_directory=/home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/simulation/qsim/ NiosDisplay -c NiosDisplayWarning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.Info (204019): Generated file NiosDisplay.vho in folder "/home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/simulation/qsim//" for EDA simulation toolInfo: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning    Info: Peak virtual memory: 715 megabytes    Info: Processing ended: Tue Sep 20 13:11:48 2022    Info: Elapsed time: 00:00:02    Info: Total CPU time (on all processors): 00:00:02
+Completed successfully. 
+
+**** Generating the ModelSim .do script ****
+
+/home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/simulation/qsim/NiosDisplay.do generated.
+
+Completed successfully. 
+
+**** Running the ModelSim simulation ****
+
+/opt/intelFPGA/20.1/modelsim_ase/bin/vsim -c -do NiosDisplay.do
+
+Reading pref.tcl
+# 2020.1
+# do NiosDisplay.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 13:11:48 on Sep 20,2022# vcom -work work NiosDisplay.vho 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package VITAL_Timing
+# -- Loading package VITAL_Primitives
+# -- Loading package dffeas_pack# -- Loading package altera_primitives_components
+# -- Loading package altera_lnsim_components
+# -- Loading package cyclonev_atom_pack
+# -- Loading package cyclonev_components
+# -- Compiling entity niosdisplay
+# -- Compiling architecture structure of niosdisplay
+# End time: 13:11:49 on Sep 20,2022, Elapsed time: 0:00:01# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 13:11:49 on Sep 20,2022# vcom -work work Waveform1.vwf.vht 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity niosdisplay_vhd_vec_tst
+# -- Compiling architecture niosdisplay_arch of niosdisplay_vhd_vec_tst
+# End time: 13:11:49 on Sep 20,2022, Elapsed time: 0:00:00# Errors: 0, Warnings: 0
+# vsim -c -t 1ps -L cyclonev -L altera -L altera_mf -L 220model -L sgate -L altera_lnsim work.niosdisplay_vhd_vec_tst # Start time: 13:11:49 on Sep 20,2022# Loading std.standard# Loading std.textio(body)# Loading ieee.std_logic_1164(body)# Loading work.niosdisplay_vhd_vec_tst(niosdisplay_arch)# Loading ieee.vital_timing(body)# Loading ieee.vital_primitives(body)# Loading altera.dffeas_pack# Loading altera.altera_primitives_components# Loading altera_lnsim.altera_lnsim_components# Loading cyclonev.cyclonev_atom_pack(body)# Loading cyclonev.cyclonev_components# Loading work.niosdisplay(structure)# Loading ieee.std_logic_arith(body)# Loading cyclonev.cyclonev_io_obuf(arch)# Loading cyclonev.cyclonev_io_ibuf(arch)# Loading cyclonev.cyclonev_lcell_comb(vital_lcell_comb)# Loading altera.dffeas(vital_dffeas)# Loading cyclonev.cyclonev_jtag(behavior)# Loading cyclonev.cyclonev_clkena(behavior)# Loading cyclonev.cyclonev_ram_block(block_arch)# Loading sv_std.std# Loading altera_lnsim.generic_m10k# Loading altera_lnsim.altera_lnsim_functions# Loading altera_lnsim.common_28nm_ram_block# Loading altera_lnsim.common_28nm_ram_register# Loading altera_lnsim.common_28nm_ram_pulse_generator# ** Warning: Design size of 532332 statements exceeds ModelSim-Intel FPGA Starter Edition recommended capacity.# Expect performance to be adversely affected.
+# after#34
+# Simulation time: 0 ps
+# Simulation time: 0 ps
+# Simulation time: 0 ps
+# Simulation time: 0 ps
+# Simulation time: 0 ps
+# Simulation time: 0 ps
+# Simulation time: 0 ps
+# Simulation time: 0 ps
+# Simulation time: 6910001 ps
+# Simulation time: 6910001 ps
+# Simulation time: 6910001 ps
+# Simulation time: 6910001 ps
+# Simulation time: 6910001 ps
+# Simulation time: 6910001 ps
+# Simulation time: 6910001 ps
+# Simulation time: 6910001 ps
+# Simulation time: 15750000 ps
+# Simulation time: 15750000 ps
+# Simulation time: 15750000 ps
+# Simulation time: 15750000 ps
+# Simulation time: 15750000 ps
+# Simulation time: 15750000 ps
+# Simulation time: 15750000 ps
+# Simulation time: 15750000 ps
+# Simulation time: 24660001 ps
+# Simulation time: 24660001 ps
+# Simulation time: 24660001 ps
+# Simulation time: 24660001 ps
+# Simulation time: 24660001 ps
+# Simulation time: 24660001 ps
+# Simulation time: 24660001 ps
+# Simulation time: 24660001 ps
+# Simulation time: 33800001 ps
+# Simulation time: 33800001 ps
+# Simulation time: 33800001 ps
+# Simulation time: 33800001 ps
+# Simulation time: 33800001 ps
+# Simulation time: 33800001 ps
+# Simulation time: 33800001 ps
+# Simulation time: 33800001 ps
+# Simulation time: 42930000 ps
+# Simulation time: 42930000 ps
+# Simulation time: 42930000 ps
+# Simulation time: 42930000 ps
+# Simulation time: 42930000 ps
+# Simulation time: 42930000 ps
+# Simulation time: 42930000 ps
+# Simulation time: 42930000 ps
+# Simulation time: 51770000 ps
+# Simulation time: 51770000 ps
+# Simulation time: 51770000 ps
+# Simulation time: 51770000 ps
+# Simulation time: 51770000 ps
+# Simulation time: 51770000 ps
+# Simulation time: 51770000 ps
+# Simulation time: 51770000 ps
+# Simulation time: 60570000 ps
+# Simulation time: 60570000 ps
+# Simulation time: 60570000 ps
+# Simulation time: 60570000 ps
+# Simulation time: 60570000 ps
+# Simulation time: 60570000 ps
+# Simulation time: 60570000 ps
+# Simulation time: 60570000 ps
+# Simulation time: 69320000 ps
+# Simulation time: 69320000 ps
+# Simulation time: 69320000 ps
+# Simulation time: 69320000 ps
+# Simulation time: 69320000 ps
+# Simulation time: 69320000 ps
+# Simulation time: 69320000 ps
+# Simulation time: 69320000 ps
+# Simulation time: 78790000 ps
+# Simulation time: 78790000 ps
+# Simulation time: 78790000 ps
+# Simulation time: 78790000 ps
+# Simulation time: 78790000 ps
+# Simulation time: 78790000 ps
+# Simulation time: 78790000 ps
+# Simulation time: 78790000 ps
+# Simulation time: 86810000 ps
+# Simulation time: 86810000 ps
+# Simulation time: 86810000 ps
+# Simulation time: 86810000 ps
+# Simulation time: 86810000 ps
+# Simulation time: 86810000 ps
+# Simulation time: 86810000 ps
+# Simulation time: 86810000 ps
+# Simulation time: 96620001 ps
+# Simulation time: 96620001 ps
+# Simulation time: 96620001 ps
+# End time: 13:15:38 on Sep 20,2022, Elapsed time: 0:03:49# Errors: 0, Warnings: 1
+Completed successfully. 
+
+**** Converting ModelSim VCD to vector waveform ****
+
+Reading /home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/Waveform1.vwf...
+
+Reading /home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/simulation/qsim/NiosDisplay.msim.vcd...
+
+Processing channel transitions... 
+
+Writing the resulting VWF to /home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/simulation/qsim/NiosDisplay_20220920131539.sim.vwf
+
+Finished VCD to VWF conversion.
+
+Completed successfully. 
+
+All completed.

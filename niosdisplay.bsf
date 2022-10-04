@@ -1,0 +1,114 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2021  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 16 16 248 224)
+	(text "niosdisplay" (rect 5 0 47 12)(font "Arial" ))
+	(text "inst" (rect 8 192 20 204)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "CLK_25" (rect 0 0 35 12)(font "Arial" ))
+		(text "CLK_25" (rect 21 27 56 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 1))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "RST_external" (rect 0 0 56 12)(font "Arial" ))
+		(text "RST_external" (rect 21 43 77 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 1))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "KEY" (rect 0 0 21 12)(font "Arial" ))
+		(text "KEY" (rect 21 59 42 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 1))
+	)
+	(port
+		(pt 232 32)
+		(output)
+		(text "LED" (rect 0 0 20 12)(font "Arial" ))
+		(text "LED" (rect 191 27 211 39)(font "Arial" ))
+		(line (pt 232 32)(pt 216 32)(line_width 1))
+	)
+	(port
+		(pt 232 48)
+		(output)
+		(text "VCLK_external" (rect 0 0 64 12)(font "Arial" ))
+		(text "VCLK_external" (rect 147 43 211 55)(font "Arial" ))
+		(line (pt 232 48)(pt 216 48)(line_width 1))
+	)
+	(port
+		(pt 232 64)
+		(output)
+		(text "HSYNC_external" (rect 0 0 70 12)(font "Arial" ))
+		(text "HSYNC_external" (rect 141 59 211 71)(font "Arial" ))
+		(line (pt 232 64)(pt 216 64)(line_width 1))
+	)
+	(port
+		(pt 232 80)
+		(output)
+		(text "VSYNC_external" (rect 0 0 71 12)(font "Arial" ))
+		(text "VSYNC_external" (rect 140 75 211 87)(font "Arial" ))
+		(line (pt 232 80)(pt 216 80)(line_width 1))
+	)
+	(port
+		(pt 232 96)
+		(output)
+		(text "BLANK_external" (rect 0 0 70 12)(font "Arial" ))
+		(text "BLANK_external" (rect 141 91 211 103)(font "Arial" ))
+		(line (pt 232 96)(pt 216 96)(line_width 1))
+	)
+	(port
+		(pt 232 112)
+		(output)
+		(text "SYNC_external" (rect 0 0 63 12)(font "Arial" ))
+		(text "SYNC_external" (rect 148 107 211 119)(font "Arial" ))
+		(line (pt 232 112)(pt 216 112)(line_width 1))
+	)
+	(port
+		(pt 232 128)
+		(output)
+		(text "R_external[7..0]" (rect 0 0 64 12)(font "Arial" ))
+		(text "R_external[7..0]" (rect 147 123 211 135)(font "Arial" ))
+		(line (pt 232 128)(pt 216 128)(line_width 3))
+	)
+	(port
+		(pt 232 144)
+		(output)
+		(text "G_External[7..0]" (rect 0 0 66 12)(font "Arial" ))
+		(text "G_External[7..0]" (rect 145 139 211 151)(font "Arial" ))
+		(line (pt 232 144)(pt 216 144)(line_width 3))
+	)
+	(port
+		(pt 232 160)
+		(output)
+		(text "B_external[7..0]" (rect 0 0 62 12)(font "Arial" ))
+		(text "B_external[7..0]" (rect 149 155 211 167)(font "Arial" ))
+		(line (pt 232 160)(pt 216 160)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 216 192)(line_width 1))
+	)
+)

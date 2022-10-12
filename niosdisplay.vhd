@@ -2,11 +2,6 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-
---if(offset = 32768)then 
---frame_buf_addr <= std_logic_vector(unsigned(frame_buf_addr_base) + offset); --Increment the address one clock cycle before last byte is red, since reading is delay by 1.
-					
-
 ENTITY niosdisplay IS
 	PORT(
 		clk			:  IN  	STD_LOGIC;
@@ -19,7 +14,9 @@ ENTITY niosdisplay IS
 		h_sync    	: OUT  STD_LOGIC;
 		v_sync    	: OUT  STD_LOGIC;
 		n_blank     : OUT  STD_LOGIC;
-		n_sync  	  	: OUT  STD_LOGIC
+		n_sync  	  	: OUT  STD_LOGIC;
+		out_frame_buf_addr : OUT STD_LOGIC_VECTOR(16 downto 0);
+		out_mem_data : OUT STD_LOGIC_VECTOR(31 downto 0)
 		);
 END niosdisplay;
 
@@ -48,86 +45,79 @@ END COMPONENT altpll0;
 
 COMPONENT system is
 	port (
-		blue_pio_export  : out std_logic_vector(7 downto 0);                    --  blue_pio.export
 		btn_pio_export   : in  std_logic_vector(3 downto 0) := (others => '0'); --   btn_pio.export
 		clk_clk          : in  std_logic                    := '0';             --       clk.clk
-		green_pio_export : out std_logic_vector(7 downto 0);                    -- green_pio.export
-		red_pio_export   : out std_logic_vector(7 downto 0);                    --   red_pio.export
 		reset_reset_n    : in  std_logic                    := '0';              --     reset.reset_n
 		mem_address      : in  std_logic_vector(16 downto 0) := (others => '0');
-		mem_readdata     : out std_logic_vector(31 downto 0)                 
+		mem_readdata     : out std_logic_vector(31 downto 0)
 	);
 END COMPONENT system;
 
-type ram_array is array (0 to 262144) of std_logic_vector (7 downto 0);
-
-signal x : integer := 478;
-signal y : integer := 600;
-
-signal GND : std_logic := '0';
-signal VCC : std_logic := '1';
+--VGA Stuff
 signal clk_138 : std_logic;
 signal column : integer;
 signal row : integer;
 signal disp_ena : std_logic;
 
-signal red_pio : std_logic_vector(7 downto 0);
-signal green_pio : std_logic_vector(7 downto 0);
-signal blue_pio : std_logic_vector(7 downto 0);
+--Nios II Stuff
 signal mem_data : std_logic_vector(31 downto 0);
-
 signal frame_buf_addr_base : std_logic_vector(16 downto 0) := "00011101000011000";--"00111010100110000";
-signal frame_buf_addr : std_logic_vector(16 downto 0) := "00000000000000000";
-signal data_ready : std_logic := '0';
+signal frame_buf_addr : natural range 14872 to 80407 := 14872;
 
 BEGIN
-	GND <= '0';
-	VCC <= '1';
 	
-	u0: altpll0 port map(GND, clk, clk_138);
-	u1: vga_controller port map(clk_138, VCC, h_sync,v_sync, disp_ena, column, row, n_blank, n_sync);
-	u2: system port map(blue_pio, btn, clk_138, green_pio, red_pio, VCC, frame_buf_addr, mem_data);
+	u0: altpll0 port map('0', clk, clk_138);
+	u1: vga_controller port map(clk_138, '1', h_sync,v_sync, disp_ena, column, row, n_blank, n_sync);
+	u2: system port map(btn, clk_138, '1', std_logic_vector(to_unsigned(frame_buf_addr, frame_buf_addr_base'length)), mem_data);
 	
+	out_frame_buf_addr <= std_logic_vector(to_unsigned(frame_buf_addr, frame_buf_addr_base'length));
+	out_mem_data <= mem_data;
 	pixel_clk <= clk_138;
 	
-	PROCESS(clk_138, disp_ena, row, column, x, y, key)
-	variable count : integer := 0;
-	variable offset : integer := 0;
+	draw_pixel : PROCESS(clk_138)
+	
+	variable count : natural range 0 to 4 := 0;
 	
 	BEGIN
-	IF(rising_edge(clk_138)) then
-		IF(disp_ena = '1') then
-			IF((row > 256) and (row < 256+512) and (column > 320) and (column < 320+512)) THEN --Inside game screen
-				if(count = 0) THEN
-					red <= mem_data(31 downto 24);
-					blue <= mem_data(31 downto 24);
-					green <= mem_data(31 downto 24);
-					count := count + 1;
-				elsif(count = 1) THEN
-					red <= mem_data(23 downto 16);
-					green <= mem_data(23 downto 16);
-					blue <= mem_data(23 downto 16);
-					count := count + 1;
-				elsif(count = 2) THEN
-					red <= mem_data(15 downto 8);
-					green <= mem_data(15 downto 8);
-					blue <= mem_data(15 downto 8);
-					count := count + 1;
-				elsif(count = 3) THEN
-					red <= mem_data(7 downto 0);
-					green <= mem_data(7 downto 0);
-					blue <= mem_data(7 downto 0);
-					count := 0;
-				elsif(count = 5) then
-					red <= mem_data(31 downto 24);
-					green <= mem_data(31 downto 24);
-					blue <= mem_data(31 downto 24);
-				end if;
-			ELSE --Gray color to boundary
-				red <= "11111001";
-				green <= "10101001";
-				blue <= "10101001";
-			END IF;
+	IF rising_edge(clk_138) then
+		IF disp_ena = '1' then
+			--IF((row > 256) and (row < 256+512) and (column > 320) and (column < 320+512)) THEN --Inside game screen
+				case count is
+					when 0 =>
+						red <= mem_data(31 downto 24);
+						blue <= mem_data(31 downto 24);
+						green <= mem_data(31 downto 24);
+						count := 1;
+					when 1 =>
+						red <= mem_data(23 downto 16);
+						green <= mem_data(23 downto 16);
+						blue <= mem_data(23 downto 16);
+						count := 2;
+					when 2 =>
+						red <= mem_data(15 downto 8);
+						green <= mem_data(15 downto 8);
+						blue <= mem_data(15 downto 8);
+						count := 3;
+						if(frame_buf_addr = 14872+65535) then
+						frame_buf_addr <= 14872;
+						else
+							frame_buf_addr <= frame_buf_addr + 1;
+						end if;
+					when 3 =>
+						red <= mem_data(7 downto 0);
+						green <= mem_data(7 downto 0);
+						blue <= mem_data(7 downto 0);
+						count := 0;
+					when others =>
+						red <= mem_data(31 downto 24);
+						green <= mem_data(31 downto 24);
+						blue <= mem_data(31 downto 24);					
+				end case;
+			--ELSE --Gray color to boundary
+				--red <= "11111001";
+				--green <= "10101001";
+				--blue <= "10101001";
+			--END IF;
 		ELSE					
 			red <= (OTHERS => '0');
 			green <= (OTHERS => '0');

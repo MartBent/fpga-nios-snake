@@ -67,11 +67,23 @@ direction_t read_direction() {
 
 int main(void) {
 
-	u8* addr = MEMORY_BASE+3; //Starting point of the video buffer
+	u8* addr = MEMORY_BASE; //Starting point of the video buffer
+	u8 color = 255;
 
-	memset(addr, 255, 4);
+	*addr = 255;
+	*(addr+1) = 0;
+	*(addr+2) = 0;
+	*(addr+3) = 255;
 
 	while(1){}
+
+	for(int i = 0; i < 128; i++) {
+
+		for(int j = 0; j < 128; j++) {
+				*(addr+(i*512)+j) =  color;
+		}
+		color = (color == 255) ? 0 : 255;
+	}
 
 	srand(time(NULL));
 

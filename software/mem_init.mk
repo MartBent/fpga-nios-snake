@@ -204,7 +204,7 @@ NIOS2_ELF_FORMAT ?= elf32-littlenios2
 #-------------------------------------
 
 # Memory: memory
-MEM_0 := ram
+MEM_0 := system_memory
 $(MEM_0)_NAME := memory
 $(MEM_0)_MEM_INIT_FILE_PARAM_NAME := INIT_FILE
 HEX_FILES += $(MEM_INIT_DIR)/$(MEM_0).hex

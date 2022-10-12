@@ -2,9 +2,9 @@
  * linker.h - Linker script mapping information
  *
  * Machine generated for CPU 'cpu' in SOPC Builder design 'system'
- * SOPC Builder design path: ../system.sopcinfo
+ * SOPC Builder design path: /home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/fpga-nios-snake/system.sopcinfo
  *
- * Generated: Tue Oct 04 15:56:03 CEST 2022
+ * Generated: Wed Oct 12 21:30:20 CEST 2022
  */
 
 /*

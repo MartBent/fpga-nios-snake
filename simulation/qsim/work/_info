@@ -10,122 +10,90 @@ z2
 !i10f 100
 cModel Technology
 Z0 d/home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/simulation/qsim
-Eniosdisplay
-Z1 w1663672308
-Z2 DPx8 cyclonev 18 cyclonev_atom_pack 0 22 3HQPc5MVbmOPN?>a5EBYj2
-Z3 DPx8 cyclonev 19 cyclonev_components 0 22 jZ]H46BQLgIP5mfRTO`3B1
-Z4 DPx12 altera_lnsim 23 altera_lnsim_components 0 22 ^Ch;U@;bMk1;>A2B<UV`k2
-Z5 DPx4 ieee 16 vital_primitives 0 22 G>kiXP8Q9dRClKfK1Zn7j1
-Z6 DPx6 altera 11 dffeas_pack 0 22 dc5N=DKXMMTVYdUQ@D3FA2
-Z7 DPx4 ieee 12 vital_timing 0 22 J>EBealN09f8GzldA[z2>3
+vniosdisplay
+Z1 !s110 1665598099
+!i10b 1
+!s100 Ca`ESJC`G5NB2iOZhVPH?2
+Z2 !s11b Dg1SIo80bB@j0V0VzS_@n1
+IHfNDhbo_ZS2^j5nUKOVDT2
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1665598097
+8NiosDisplay.vo
+FNiosDisplay.vo
+!i122 50
+L0 32 100330
+Z4 OV;L;2020.1;71
+r1
+!s85 0
+31
+!s108 1665598098.000000
+!s107 NiosDisplay.vo|
+!s90 -work|work|NiosDisplay.vo|
+!i113 1
+Z5 o-work work
+Z6 tCvgOpt 0
+Eniosdisplay_vhd_vec_tst
+Z7 w1663672305
 Z8 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z9 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
-Z10 DPx6 altera 28 altera_primitives_components 0 22 ca:ehlQAg4;_gVV:^8MAg3
-!i122 42
+!i122 43
 R0
-Z11 8NiosDisplay.vho
-Z12 FNiosDisplay.vho
+Z10 8Waveform1.vwf.vht
+Z11 FWaveform1.vwf.vht
 l0
-L39 1
-V5Lb0kX=H[A;Fll2UCg@bM2
-!s100 Kc^8Jf^2B]?Ub[;ai?dUb1
-Z13 OV;C;2020.1;71
+L32 1
+VK4[zY0M><]?>`@oSMa8>d1
+!s100 CMW>oHjF:EPN]3>3]_PRk3
+Z12 OV;C;2020.1;71
 32
-!s110 1663672308
+Z13 !s110 1663672309
 !i10b 1
-Z14 !s108 1663672308.000000
-Z15 !s90 -work|work|NiosDisplay.vho|
-Z16 !s107 NiosDisplay.vho|
+Z14 !s108 1663672309.000000
+Z15 !s90 -work|work|Waveform1.vwf.vht|
+Z16 !s107 Waveform1.vwf.vht|
 !i113 1
-Z17 o-work work
-Z18 tExplicit 1 CvgOpt 0
-Astructure
-R2
-R3
-R4
 R5
-R6
-R7
+Z17 tExplicit 1 CvgOpt 0
+Aniosdisplay_arch
 R8
 R9
-R10
-DEx4 work 11 niosdisplay 0 22 5Lb0kX=H[A;Fll2UCg@bM2
-!i122 42
-l3428
-L100 58272
-VM8M4`JH=j]ZMgW9;oz>aI3
-!s100 FnLn<cU7acoUYO3VGGGXh0
-R13
+DEx4 work 23 niosdisplay_vhd_vec_tst 0 22 K4[zY0M><]?>`@oSMa8>d1
+!i122 43
+l65
+L34 75
+VcK?koT<`ET@`kCf088hJ01
+!s100 cMBiWL:RF590hzTc9V@l]0
+R12
 32
-Z19 !s110 1663672309
+R13
 !i10b 1
 R14
 R15
 R16
 !i113 1
+R5
 R17
-R18
-Eniosdisplay_vhd_vec_tst
-Z20 w1663672305
-R8
-R9
-!i122 43
-R0
-Z21 8Waveform1.vwf.vht
-Z22 FWaveform1.vwf.vht
-l0
-L32 1
-VK4[zY0M><]?>`@oSMa8>d1
-!s100 CMW>oHjF:EPN]3>3]_PRk3
-R13
-32
-R19
-!i10b 1
-Z23 !s108 1663672309.000000
-Z24 !s90 -work|work|Waveform1.vwf.vht|
-Z25 !s107 Waveform1.vwf.vht|
-!i113 1
-R17
-R18
-Aniosdisplay_arch
-R8
-R9
-Z26 DEx4 work 23 niosdisplay_vhd_vec_tst 0 22 K4[zY0M><]?>`@oSMa8>d1
-!i122 43
-l65
-Z27 L34 75
-VcK?koT<`ET@`kCf088hJ01
-!s100 cMBiWL:RF590hzTc9V@l]0
-R13
-32
-R19
-!i10b 1
-R23
-R24
-R25
-!i113 1
-R17
-R18
 vniosdisplay_vlg_vec_tst
-!s110 1663670843
+R1
 !i10b 1
-!s100 eJB=Z2K`Wh9KTA2Z>_90;0
-!s11b Dg1SIo80bB@j0V0VzS_@n1
-Ii5EPOM5Ph35nI<G?@XARR0
-VDg1SIo80bB@j0V0VzS_@n1
+!s100 XFo_IKPCd_4d]2hQJGo9H0
+R2
+IWeEHP9IA0:<8f35MHWkmk3
+R3
 R0
-w1663670839
-8Waveform1.vwf.vt
-FWaveform1.vwf.vt
-!i122 37
-L0 30 58
-OV;L;2020.1;71
+w1665598094
+8Waveform.vwf.vt
+FWaveform.vwf.vt
+!i122 51
+L0 30 48
+R4
 r1
 !s85 0
 31
-!s108 1663670843.000000
-!s107 Waveform1.vwf.vt|
-!s90 -work|work|Waveform1.vwf.vt|
+!s108 1665598099.000000
+!s107 Waveform.vwf.vt|
+!s90 -work|work|Waveform.vwf.vt|
 !i113 1
-R17
-tCvgOpt 0
+R5
+R6

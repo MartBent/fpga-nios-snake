@@ -4,12 +4,13 @@
 			btn_pio_export   : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- export
 			clk_clk          : in  std_logic                     := 'X';             -- clk
 			green_pio_export : out std_logic_vector(7 downto 0);                     -- export
-			mem_address      : in  std_logic_vector(18 downto 0) := (others => 'X'); -- address
+			mem_address      : in  std_logic_vector(16 downto 0) := (others => 'X'); -- address
 			mem_chipselect   : in  std_logic                     := 'X';             -- chipselect
 			mem_clken        : in  std_logic                     := 'X';             -- clken
 			mem_write        : in  std_logic                     := 'X';             -- write
-			mem_readdata     : out std_logic_vector(7 downto 0);                     -- readdata
-			mem_writedata    : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- writedata
+			mem_readdata     : out std_logic_vector(31 downto 0);                    -- readdata
+			mem_writedata    : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			mem_byteenable   : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- byteenable
 			red_pio_export   : out std_logic_vector(7 downto 0);                     -- export
 			reset_reset_n    : in  std_logic                     := 'X'              -- reset_n
 		);
@@ -27,6 +28,7 @@
 			mem_write        => CONNECTED_TO_mem_write,        --          .write
 			mem_readdata     => CONNECTED_TO_mem_readdata,     --          .readdata
 			mem_writedata    => CONNECTED_TO_mem_writedata,    --          .writedata
+			mem_byteenable   => CONNECTED_TO_mem_byteenable,   --          .byteenable
 			red_pio_export   => CONNECTED_TO_red_pio_export,   --   red_pio.export
 			reset_reset_n    => CONNECTED_TO_reset_reset_n     --     reset.reset_n
 		);

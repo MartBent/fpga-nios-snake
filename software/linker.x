@@ -2,9 +2,9 @@
  * linker.x - Linker script
  *
  * Machine generated for CPU 'cpu' in SOPC Builder design 'system'
- * SOPC Builder design path: ../system.sopcinfo
+ * SOPC Builder design path: /home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/fpga-nios-snake/system.sopcinfo
  *
- * Generated: Tue Oct 04 15:56:03 CEST 2022
+ * Generated: Wed Oct 12 21:30:20 CEST 2022
  */
 
 /*
@@ -64,9 +64,12 @@ OUTPUT_ARCH( nios2 )
 ENTRY( _start )
 
 /*
- * The alt_load() facility is disabled. This typically happens when an
- * external bootloader is provided or the application runs in place.
- * The LMA (aka physical address) of each section defaults to its VMA.
+ * The alt_load() facility is enabled. This typically happens when there isn't
+ * an external bootloader (e.g. flash bootloader).
+ * The LMA (aka physical address) of each loaded section is
+ * set to the .text memory device.
+ * The HAL alt_load() routine called from crt0 copies sections from
+ * the .text memory to RAM as needed.
  */
 
 SECTIONS
@@ -218,7 +221,18 @@ SECTIONS
 
     PROVIDE (__flash_rodata_start = LOADADDR(.rodata));
 
-    .rwdata :
+    /*
+     *
+     * This section's LMA is set to the .text region.
+     * crt0 will copy to this section's specified mapped region virtual memory address (VMA)
+     *
+     * .rwdata region equals the .text region, and is set to be loaded into .text region.
+     * This requires two copies of .rwdata in the .text region. One read writable at VMA.
+     * and one read-only at LMA. crt0 will copy from LMA to VMA on reset
+     *
+     */
+
+    .rwdata LOADADDR (.rodata) + SIZEOF (.rodata) : AT ( LOADADDR (.rodata) + SIZEOF (.rodata)+ SIZEOF (.rwdata) )
     {
         PROVIDE (__ram_rwdata_start = ABSOLUTE(.));
         . = ALIGN(4);
@@ -241,7 +255,14 @@ SECTIONS
 
     PROVIDE (__flash_rwdata_start = LOADADDR(.rwdata));
 
-    .bss :
+    /*
+     *
+     * This section's LMA is set to the .text region.
+     * crt0 will copy to this section's specified mapped region virtual memory address (VMA)
+     *
+     */
+
+    .bss LOADADDR (.rwdata) + SIZEOF (.rwdata) : AT ( LOADADDR (.rwdata) + SIZEOF (.rwdata) )
     {
         __bss_start = ABSOLUTE(.);
         PROVIDE (__sbss_start = ABSOLUTE(.));
@@ -272,9 +293,21 @@ SECTIONS
      * The output section used for the heap is treated in a special way,
      * i.e. the symbols "end" and "_end" are added to point to the heap start.
      *
+     * Because alt_load() is enabled, these sections have
+     * their LMA set to be loaded into the .text memory region.
+     * However, the alt_load() code will NOT automatically copy
+     * these sections into their mapped memory region.
+     *
      */
 
-    .memory :
+    /*
+     *
+     * This section's LMA is set to the .text region.
+     * crt0 will copy to this section's specified mapped region virtual memory address (VMA)
+     *
+     */
+
+    .memory LOADADDR (.bss) + SIZEOF (.bss) : AT ( LOADADDR (.bss) + SIZEOF (.bss) )
     {
         PROVIDE (_alt_partition_memory_start = ABSOLUTE(.));
         *(.memory .memory. memory.*)

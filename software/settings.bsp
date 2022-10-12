@@ -2,11 +2,11 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Oct 4, 2022 3:56:03 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1664891763034</BspGeneratedUnixTimeStamp>
-        <BspGeneratedLocation>/home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/software</BspGeneratedLocation>
-        <BspSettingsFile>/home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/software/settings.bsp</BspSettingsFile>
-        <SopcDesignFile>../system.sopcinfo</SopcDesignFile>
+        <BspGeneratedTimeStamp>Oct 12, 2022 9:30:20 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1665603020713</BspGeneratedUnixTimeStamp>
+        <BspGeneratedLocation>./</BspGeneratedLocation>
+        <BspSettingsFile>/home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/fpga-nios-snake/software/hal_bsp/settings.bsp</BspSettingsFile>
+        <SopcDesignFile>../../system.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>
         <Cpu>cpu</Cpu>
         <SchemaVersion>1.9</SchemaVersion>
@@ -50,7 +50,7 @@
                 <SettingName>hal.enable_instruction_related_exceptions_api</SettingName>
                 <Identifier>ALT_INCLUDE_INSTRUCTION_RELATED_EXCEPTION_API</Identifier>
                 <Type>BooleanDefineOnly</Type>
-                <Value>false</Value>
+                <Value>true</Value>
                 <DefaultValue>false</DefaultValue>
                 <DestinationFile>system_h_define</DestinationFile>
                 <Description>Enables API for registering handlers to service instruction-related exceptions. Enabling this setting increases the size of the exception entry code.</Description>
@@ -74,7 +74,7 @@
                 <SettingName>hal.linker.enable_alt_load</SettingName>
                 <Identifier>none</Identifier>
                 <Type>Boolean</Type>
-                <Value>0</Value>
+                <Value>1</Value>
                 <DefaultValue>0</DefaultValue>
                 <DestinationFile>none</DestinationFile>
                 <Description>Enables the alt_load() facility. The alt_load() facility copies data sections (.rodata, .rwdata, or .exceptions) from boot memory to RAM. If true, this setting sets up the VMA/LMA of sections in linker.x to allow them to be loaded into the .text memory.</Description>
@@ -722,7 +722,7 @@
                 <SettingName>hal.enable_exit</SettingName>
                 <Identifier>ALT_NO_EXIT</Identifier>
                 <Type>Boolean</Type>
-                <Value>0</Value>
+                <Value>1</Value>
                 <DefaultValue>1</DefaultValue>
                 <DestinationFile>public_mk_define</DestinationFile>
                 <Description>Add exit() support. This option increases code footprint if your "main()" routine does "return" or call "exit()". If false, adds -DALT_NO_EXIT to ALT_CPPFLAGS in public.mk, and reduces footprint</Description>
@@ -746,7 +746,7 @@
                 <SettingName>hal.enable_clean_exit</SettingName>
                 <Identifier>ALT_NO_CLEAN_EXIT</Identifier>
                 <Type>Boolean</Type>
-                <Value>0</Value>
+                <Value>1</Value>
                 <DefaultValue>1</DefaultValue>
                 <DestinationFile>public_mk_define</DestinationFile>
                 <Description>When your application exits, close file descriptors, call C++ destructors, etc. Code footprint can be reduced by disabling clean exit. If disabled, adds -DALT_NO_CLEAN_EXIT to ALT_CPPFLAGS -D'exit(a)=_exit(a)' in public.mk.</Description>

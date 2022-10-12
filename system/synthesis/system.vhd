@@ -12,12 +12,13 @@ entity system is
 		btn_pio_export   : in  std_logic_vector(3 downto 0)  := (others => '0'); --   btn_pio.export
 		clk_clk          : in  std_logic                     := '0';             --       clk.clk
 		green_pio_export : out std_logic_vector(7 downto 0);                     -- green_pio.export
-		mem_address      : in  std_logic_vector(18 downto 0) := (others => '0'); --       mem.address
+		mem_address      : in  std_logic_vector(16 downto 0) := (others => '0'); --       mem.address
 		mem_chipselect   : in  std_logic                     := '0';             --          .chipselect
 		mem_clken        : in  std_logic                     := '0';             --          .clken
 		mem_write        : in  std_logic                     := '0';             --          .write
-		mem_readdata     : out std_logic_vector(7 downto 0);                     --          .readdata
-		mem_writedata    : in  std_logic_vector(7 downto 0)  := (others => '0'); --          .writedata
+		mem_readdata     : out std_logic_vector(31 downto 0);                    --          .readdata
+		mem_writedata    : in  std_logic_vector(31 downto 0) := (others => '0'); --          .writedata
+		mem_byteenable   : in  std_logic_vector(3 downto 0)  := (others => '0'); --          .byteenable
 		red_pio_export   : out std_logic_vector(7 downto 0);                     --   red_pio.export
 		reset_reset_n    : in  std_logic                     := '0'              --     reset.reset_n
 	);
@@ -102,12 +103,13 @@ architecture rtl of system is
 			readdata    : out std_logic_vector(31 downto 0);                    -- readdata
 			writedata   : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
 			byteenable  : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- byteenable
-			address2    : in  std_logic_vector(18 downto 0) := (others => 'X'); -- address
+			address2    : in  std_logic_vector(16 downto 0) := (others => 'X'); -- address
 			chipselect2 : in  std_logic                     := 'X';             -- chipselect
 			clken2      : in  std_logic                     := 'X';             -- clken
 			write2      : in  std_logic                     := 'X';             -- write
-			readdata2   : out std_logic_vector(7 downto 0);                     -- readdata
-			writedata2  : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- writedata
+			readdata2   : out std_logic_vector(31 downto 0);                    -- readdata
+			writedata2  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			byteenable2 : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- byteenable
 			clk         : in  std_logic                     := 'X';             -- clk
 			reset       : in  std_logic                     := 'X';             -- reset
 			reset_req   : in  std_logic                     := 'X';             -- reset_req
@@ -432,6 +434,7 @@ begin
 			write2      => mem_write,                              --       .write
 			readdata2   => mem_readdata,                           --       .readdata
 			writedata2  => mem_writedata,                          --       .writedata
+			byteenable2 => mem_byteenable,                         --       .byteenable
 			clk         => clk_clk,                                --   clk1.clk
 			reset       => rst_controller_reset_out_reset,         -- reset1.reset
 			reset_req   => rst_controller_reset_out_reset_req,     --       .reset_req

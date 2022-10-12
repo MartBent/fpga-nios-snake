@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "09/19/2022 16:13:19"
+// Generated on "10/12/2022 20:08:14"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          niosdisplay
 // 
@@ -30,57 +30,49 @@
 module niosdisplay_vlg_vec_tst();
 // constants                                           
 // general purpose registers
-reg CLK_50;
-reg KEY;
-reg RST_external;
+reg [3:0] btn;
+reg clk;
+reg key;
 // wires                                               
-wire [7:0] B_external;
-wire BLANK_external;
-wire [7:0] G_External;
-wire HSYNC_external;
-wire LED;
-wire [7:0] R_external;
-wire SYNC_external;
-wire VCLK_external;
-wire VSYNC_external;
+wire [7:0] blue;
+wire [7:0] green;
+wire h_sync;
+wire n_blank;
+wire n_sync;
+wire [16:0] out_frame_buf_addr;
+wire [31:0] out_mem_data;
+wire pixel_clk;
+wire [7:0] red;
+wire v_sync;
 
 // assign statements (if any)                          
 niosdisplay i1 (
 // port map - connection between master ports and signals/registers   
-	.B_external(B_external),
-	.BLANK_external(BLANK_external),
-	.CLK_50(CLK_50),
-	.G_External(G_External),
-	.HSYNC_external(HSYNC_external),
-	.KEY(KEY),
-	.LED(LED),
-	.R_external(R_external),
-	.RST_external(RST_external),
-	.SYNC_external(SYNC_external),
-	.VCLK_external(VCLK_external),
-	.VSYNC_external(VSYNC_external)
+	.blue(blue),
+	.btn(btn),
+	.clk(clk),
+	.green(green),
+	.h_sync(h_sync),
+	.key(key),
+	.n_blank(n_blank),
+	.n_sync(n_sync),
+	.out_frame_buf_addr(out_frame_buf_addr),
+	.out_mem_data(out_mem_data),
+	.pixel_clk(pixel_clk),
+	.red(red),
+	.v_sync(v_sync)
 );
 initial 
 begin 
 #1000000 $finish;
 end 
 
-// CLK_50
-initial
+// clk
+always
 begin
-	CLK_50 = 1'b0;
-end 
-
-// KEY
-initial
-begin
-	KEY = 1'b0;
-end 
-
-// RST_external
-initial
-begin
-	RST_external = 1'b0;
+	clk = 1'b0;
+	clk = #10000 1'b1;
+	#10000;
 end 
 endmodule
 

@@ -2,9 +2,9 @@
  * system.h - SOPC Builder system and BSP software package information
  *
  * Machine generated for CPU 'cpu' in SOPC Builder design 'system'
- * SOPC Builder design path: ../system.sopcinfo
+ * SOPC Builder design path: /home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/fpga-nios-snake/system.sopcinfo
  *
- * Generated: Tue Oct 04 15:56:03 CEST 2022
+ * Generated: Wed Oct 12 21:30:20 CEST 2022
  */
 
 /*
@@ -262,6 +262,7 @@
  *
  */
 
+#define ALT_INCLUDE_INSTRUCTION_RELATED_EXCEPTION_API
 #define ALT_MAX_FD 32
 #define ALT_SYS_CLK SYS_CLK_TIMER
 #define ALT_TIMESTAMP_CLK none
@@ -297,15 +298,15 @@
 #define MEMORY_CONTENTS_INFO ""
 #define MEMORY_DUAL_PORT 1
 #define MEMORY_GUI_RAM_BLOCK_TYPE "AUTO"
-#define MEMORY_INIT_CONTENTS_FILE "ram"
+#define MEMORY_INIT_CONTENTS_FILE "system_memory"
 #define MEMORY_INIT_MEM_CONTENT 1
 #define MEMORY_INSTANCE_ID "NONE"
 #define MEMORY_IRQ -1
 #define MEMORY_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define MEMORY_NAME "/dev/memory"
-#define MEMORY_NON_DEFAULT_INIT_FILE_ENABLED 1
+#define MEMORY_NON_DEFAULT_INIT_FILE_ENABLED 0
 #define MEMORY_RAM_BLOCK_TYPE "AUTO"
-#define MEMORY_READ_DURING_WRITE_MODE "OLD_DATA"
+#define MEMORY_READ_DURING_WRITE_MODE "DONT_CARE"
 #define MEMORY_SINGLE_CLOCK_OP 1
 #define MEMORY_SIZE_MULTIPLE 1
 #define MEMORY_SIZE_VALUE 312144

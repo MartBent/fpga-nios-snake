@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="system" kind="system" version="1.0" fabric="QSYS">
  <!-- Format version 21.1 842 (Future versions may contain additional information.) -->
- <!-- 2022.10.04.16:26:42 -->
+ <!-- 2022.10.12.21:22:56 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1664893601</value>
+  <value>1665602576</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -6778,7 +6778,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.INIT_CONTENTS_FILE</name>
-   <value>ram</value>
+   <value>system_memory</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.INIT_MEM_CONTENT</name>
@@ -6790,7 +6790,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.NON_DEFAULT_INIT_FILE_ENABLED</name>
-   <value>1</value>
+   <value>0</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.RAM_BLOCK_TYPE</name>
@@ -6798,7 +6798,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.READ_DURING_WRITE_MODE</name>
-   <value>OLD_DATA</value>
+   <value>DONT_CARE</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.SINGLE_CLOCK_OP</name>
@@ -6842,7 +6842,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.memoryInfo.MEM_INIT_FILENAME</name>
-   <value>ram</value>
+   <value>system_memory</value>
   </assignment>
   <assignment>
    <name>postgeneration.simulation.init_file.param_name</name>
@@ -6881,7 +6881,7 @@ the requested settings for a module instance. -->
    <value>8</value>
    <derived>false</derived>
    <enabled>true</enabled>
-   <visible>true</visible>
+   <visible>false</visible>
    <valid>true</valid>
   </parameter>
   <parameter name="dualPort">
@@ -6894,7 +6894,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="enableDiffWidth">
    <type>boolean</type>
-   <value>true</value>
+   <value>false</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -6902,7 +6902,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="derived_enableDiffWidth">
    <type>boolean</type>
-   <value>true</value>
+   <value>false</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -6920,7 +6920,7 @@ the requested settings for a module instance. -->
    <type>java.lang.String</type>
    <value>/home/martb/Desktop/ram.hex</value>
    <derived>false</derived>
-   <enabled>true</enabled>
+   <enabled>false</enabled>
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
@@ -6950,7 +6950,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="readDuringWriteMode">
    <type>java.lang.String</type>
-   <value>OLD_DATA</value>
+   <value>DONT_CARE</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -7006,7 +7006,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="useNonDefaultInitFile">
    <type>boolean</type>
-   <value>true</value>
+   <value>false</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -7016,7 +7016,7 @@ the requested settings for a module instance. -->
    <type>boolean</type>
    <value>false</value>
    <derived>false</derived>
-   <enabled>true</enabled>
+   <enabled>false</enabled>
    <visible>false</visible>
    <valid>true</valid>
   </parameter>
@@ -7089,7 +7089,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="derived_set_addr_width2">
    <type>int</type>
-   <value>19</value>
+   <value>17</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -7105,7 +7105,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="derived_set_data_width2">
    <type>int</type>
-   <value>8</value>
+   <value>32</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -7129,7 +7129,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="derived_init_file_name">
    <type>java.lang.String</type>
-   <value>/home/martb/Desktop/ram.hex</value>
+   <value>system_memory.hex</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -7857,7 +7857,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>address2</name>
     <direction>Input</direction>
-    <width>19</width>
+    <width>17</width>
     <role>address</role>
    </port>
    <port>
@@ -7881,14 +7881,20 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>readdata2</name>
     <direction>Output</direction>
-    <width>8</width>
+    <width>32</width>
     <role>readdata</role>
    </port>
    <port>
     <name>writedata2</name>
     <direction>Input</direction>
-    <width>8</width>
+    <width>32</width>
     <role>writedata</role>
+   </port>
+   <port>
+    <name>byteenable2</name>
+    <direction>Input</direction>
+    <width>4</width>
+    <role>byteenable</role>
    </port>
   </interface>
   <interface name="clk1" kind="clock_sink" version="21.1">

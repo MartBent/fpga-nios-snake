@@ -9,6 +9,7 @@
 		.mem_write        (<connected-to-mem_write>),        //          .write
 		.mem_readdata     (<connected-to-mem_readdata>),     //          .readdata
 		.mem_writedata    (<connected-to-mem_writedata>),    //          .writedata
+		.mem_byteenable   (<connected-to-mem_byteenable>),   //          .byteenable
 		.red_pio_export   (<connected-to-red_pio_export>),   //   red_pio.export
 		.reset_reset_n    (<connected-to-reset_reset_n>)     //     reset.reset_n
 	);

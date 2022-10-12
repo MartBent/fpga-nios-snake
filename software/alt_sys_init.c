@@ -2,9 +2,9 @@
  * alt_sys_init.c - HAL initialization source
  *
  * Machine generated for CPU 'cpu' in SOPC Builder design 'system'
- * SOPC Builder design path: ../system.sopcinfo
+ * SOPC Builder design path: /home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/fpga-nios-snake/system.sopcinfo
  *
- * Generated: Wed Sep 21 18:41:14 CEST 2022
+ * Generated: Wed Oct 12 21:30:20 CEST 2022
  */
 
 /*

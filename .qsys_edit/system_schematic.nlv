@@ -1,0 +1,28 @@
+# # File gsaved with Nlview version 6.3.8  2013-12-19 bk=1.2992 VDI=34 GEI=35
+# 
+preplace inst system.clk138 -pg 1 -lvl 1 -y 180
+preplace inst system.jtag -pg 1 -lvl 3 -y 30
+preplace inst system.cpu.reset_bridge -pg 1
+preplace inst system.cpu.cpu -pg 1
+preplace inst system.btn_pio -pg 1 -lvl 3 -y 530
+preplace inst system.sys_clk_timer -pg 1 -lvl 3 -y 330
+preplace inst system.cpu -pg 1 -lvl 2 -y 100
+preplace inst system.red_pio -pg 1 -lvl 3 -y 730
+preplace inst system.green_pio -pg 1 -lvl 3 -y 630
+preplace inst system.blue_pio -pg 1 -lvl 3 -y 430
+preplace inst system.memory -pg 1 -lvl 3 -y 230
+preplace inst system -pg 1 -lvl 1 -y 40 -regy -20
+preplace inst system.cpu.clock_bridge -pg 1
+preplace netloc EXPORT<net_container>system</net_container>(SLAVE)system.red_pio,(SLAVE)red_pio.external_connection) 1 0 3 NJ 760 NJ 760 NJ
+preplace netloc FAN_OUT<net_container>system</net_container>(SLAVE)memory.clk1,(MASTER)clk138.clk,(SLAVE)jtag.clk,(SLAVE)green_pio.clk,(SLAVE)blue_pio.clk,(SLAVE)cpu.clk,(SLAVE)red_pio.clk,(SLAVE)btn_pio.clk,(SLAVE)sys_clk_timer.clk) 1 1 2 280 680 720
+preplace netloc EXPORT<net_container>system</net_container>(SLAVE)system.green_pio,(SLAVE)green_pio.external_connection) 1 0 3 NJ 660 NJ 660 NJ
+preplace netloc EXPORT<net_container>system</net_container>(SLAVE)clk138.clk_in,(SLAVE)system.clk) 1 0 1 NJ
+preplace netloc EXPORT<net_container>system</net_container>(SLAVE)system.btn_pio,(SLAVE)btn_pio.external_connection) 1 0 3 NJ 560 NJ 560 NJ
+preplace netloc EXPORT<net_container>system</net_container>(SLAVE)memory.s2,(SLAVE)system.mem) 1 0 3 NJ 300 NJ 300 NJ
+preplace netloc FAN_OUT<net_container>system</net_container>(SLAVE)jtag.irq,(SLAVE)sys_clk_timer.irq,(MASTER)cpu.irq) 1 2 1 760
+preplace netloc EXPORT<net_container>system</net_container>(SLAVE)system.reset,(SLAVE)clk138.clk_in_reset) 1 0 1 NJ
+preplace netloc INTERCONNECT<net_container>system</net_container>(SLAVE)btn_pio.reset,(SLAVE)memory.reset1,(SLAVE)green_pio.reset,(SLAVE)blue_pio.reset,(SLAVE)cpu.reset,(SLAVE)jtag.reset,(MASTER)clk138.clk_reset,(SLAVE)sys_clk_timer.reset,(MASTER)cpu.debug_reset_request,(SLAVE)red_pio.reset) 1 1 2 300 780 740
+preplace netloc INTERCONNECT<net_container>system</net_container>(SLAVE)blue_pio.s1,(SLAVE)sys_clk_timer.s1,(SLAVE)jtag.avalon_jtag_slave,(SLAVE)red_pio.s1,(SLAVE)cpu.debug_mem_slave,(MASTER)cpu.data_master,(MASTER)cpu.instruction_master,(SLAVE)memory.s1,(SLAVE)green_pio.s1,(SLAVE)btn_pio.s1) 1 1 2 320 800 700
+preplace netloc EXPORT<net_container>system</net_container>(SLAVE)system.blue_pio,(SLAVE)blue_pio.external_connection) 1 0 3 NJ 460 NJ 460 NJ
+levelinfo -pg 1 0 70 980
+levelinfo -hier system 80 110 460 820 970

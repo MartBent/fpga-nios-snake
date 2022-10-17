@@ -14,9 +14,7 @@ ENTITY niosdisplay IS
 		h_sync    	: OUT  STD_LOGIC;
 		v_sync    	: OUT  STD_LOGIC;
 		n_blank     : OUT  STD_LOGIC;
-		n_sync  	  	: OUT  STD_LOGIC;
-		out_frame_buf_addr : OUT STD_LOGIC_VECTOR(16 downto 0);
-		out_mem_data : OUT STD_LOGIC_VECTOR(31 downto 0)
+		n_sync  	  	: OUT  STD_LOGIC
 		);
 END niosdisplay;
 
@@ -45,11 +43,16 @@ END COMPONENT altpll0;
 
 COMPONENT system is
 	port (
-		btn_pio_export   : in  std_logic_vector(3 downto 0) := (others => '0'); --   btn_pio.export
-		clk_clk          : in  std_logic                    := '0';             --       clk.clk
-		reset_reset_n    : in  std_logic                    := '0';              --     reset.reset_n
-		mem_address      : in  std_logic_vector(16 downto 0) := (others => '0');
-		mem_readdata     : out std_logic_vector(31 downto 0)
+		btn_pio_export       : in  std_logic_vector(3 downto 0)  := (others => '0'); --   btn_pio.export
+		clk_clk              : in  std_logic                     := '0';             --       clk.clk
+		frame_buf_address    : in  std_logic_vector(16 downto 0) := (others => '0'); -- frame_buf.address
+		frame_buf_chipselect : in  std_logic                     := '0';             --          .chipselect
+		frame_buf_clken      : in  std_logic                     := '0';             --          .clken
+		frame_buf_write      : in  std_logic                     := '0';             --          .write
+		frame_buf_readdata   : out std_logic_vector(31 downto 0);                    --          .readdata
+		frame_buf_writedata  : in  std_logic_vector(31 downto 0) := (others => '0'); --          .writedata
+		frame_buf_byteenable : in  std_logic_vector(3 downto 0)  := (others => '0'); --          .byteenable
+		reset_reset_n        : in  std_logic                     := '0'              --     reset.reset_n
 	);
 END COMPONENT system;
 
@@ -60,18 +63,21 @@ signal row : integer;
 signal disp_ena : std_logic;
 
 --Nios II Stuff
-signal mem_data : std_logic_vector(31 downto 0);
-signal frame_buf_addr_base : std_logic_vector(16 downto 0) := "00011101000011000";--"00111010100110000";
-signal frame_buf_addr : natural range 14872 to 80407 := 14872;
+signal mem_data : std_logic_vector(31 downto 0) := (others => '0');
+signal frame_buf_addr : natural range 0 to 65536 := 0;
 
 BEGIN
 	
 	u0: altpll0 port map('0', clk, clk_138);
 	u1: vga_controller port map(clk_138, '1', h_sync,v_sync, disp_ena, column, row, n_blank, n_sync);
-	u2: system port map(btn, clk_138, '1', std_logic_vector(to_unsigned(frame_buf_addr, frame_buf_addr_base'length)), mem_data);
+	u2: system port map(btn_pio_export => btn, 
+							  clk_clk => clk_138, 
+							  reset_reset_n => '1', 
+							  frame_buf_address => std_logic_vector(to_unsigned(frame_buf_addr, 17)), 
+							  frame_buf_readdata => mem_data,
+							  frame_buf_chipselect => '0'
+							  );
 	
-	out_frame_buf_addr <= std_logic_vector(to_unsigned(frame_buf_addr, frame_buf_addr_base'length));
-	out_mem_data <= mem_data;
 	pixel_clk <= clk_138;
 	
 	draw_pixel : PROCESS(clk_138)
@@ -98,8 +104,8 @@ BEGIN
 						green <= mem_data(15 downto 8);
 						blue <= mem_data(15 downto 8);
 						count := 3;
-						if(frame_buf_addr = 14872+65535) then
-						frame_buf_addr <= 14872;
+						if(frame_buf_addr = 65535) then
+						frame_buf_addr <= 0;
 						else
 							frame_buf_addr <= frame_buf_addr + 1;
 						end if;

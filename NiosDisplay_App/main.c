@@ -67,7 +67,7 @@ direction_t read_direction() {
 
 int main(void) {
 
-	u8* addr = MEMORY_BASE; //Starting point of the video buffer
+	u8* addr = FRAME_BUFFER_BASE; //Starting point of the video buffer
 	u8 color = 255;
 
 	*addr = 255;

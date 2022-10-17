@@ -2,10 +2,10 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Oct 12, 2022 9:30:20 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1665603020713</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Oct 13, 2022 2:31:03 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1665664263139</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>./</BspGeneratedLocation>
-        <BspSettingsFile>/home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/fpga-nios-snake/software/hal_bsp/settings.bsp</BspSettingsFile>
+        <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>../../system.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>
         <Cpu>cpu</Cpu>
@@ -899,44 +899,32 @@
                 <Group xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
         </Setting>
         <MemoryMap>
+                <slaveDescriptor>frame_buffer</slaveDescriptor>
+                <addressRange>0x00100000 - 0x00144E1F</addressRange>
+                <addressSpan>282144</addressSpan>
+                <attributes>memory</attributes>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>memory</slaveDescriptor>
-                <addressRange>0x00080000 - 0x000CC34F</addressRange>
-                <addressSpan>312144</addressSpan>
+                <addressRange>0x00180000 - 0x0018FFFF</addressRange>
+                <addressSpan>65536</addressSpan>
                 <attributes>memory</attributes>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>sys_clk_timer</slaveDescriptor>
-                <addressRange>0x00101000 - 0x0010101F</addressRange>
+                <addressRange>0x00201000 - 0x0020101F</addressRange>
                 <addressSpan>32</addressSpan>
                 <attributes>timer</attributes>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>btn_pio</slaveDescriptor>
-                <addressRange>0x00101030 - 0x0010103F</addressRange>
-                <addressSpan>16</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>green_pio</slaveDescriptor>
-                <addressRange>0x00101040 - 0x0010104F</addressRange>
-                <addressSpan>16</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>blue_pio</slaveDescriptor>
-                <addressRange>0x00101050 - 0x0010105F</addressRange>
-                <addressSpan>16</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>red_pio</slaveDescriptor>
-                <addressRange>0x00101060 - 0x0010106F</addressRange>
+                <addressRange>0x00201020 - 0x0020102F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>jtag</slaveDescriptor>
-                <addressRange>0x00101070 - 0x00101077</addressRange>
+                <addressRange>0x00201030 - 0x00201037</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
         </MemoryMap>

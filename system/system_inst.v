@@ -1,16 +1,13 @@
 	system u0 (
-		.blue_pio_export  (<connected-to-blue_pio_export>),  //  blue_pio.export
-		.btn_pio_export   (<connected-to-btn_pio_export>),   //   btn_pio.export
-		.clk_clk          (<connected-to-clk_clk>),          //       clk.clk
-		.green_pio_export (<connected-to-green_pio_export>), // green_pio.export
-		.mem_address      (<connected-to-mem_address>),      //       mem.address
-		.mem_chipselect   (<connected-to-mem_chipselect>),   //          .chipselect
-		.mem_clken        (<connected-to-mem_clken>),        //          .clken
-		.mem_write        (<connected-to-mem_write>),        //          .write
-		.mem_readdata     (<connected-to-mem_readdata>),     //          .readdata
-		.mem_writedata    (<connected-to-mem_writedata>),    //          .writedata
-		.mem_byteenable   (<connected-to-mem_byteenable>),   //          .byteenable
-		.red_pio_export   (<connected-to-red_pio_export>),   //   red_pio.export
-		.reset_reset_n    (<connected-to-reset_reset_n>)     //     reset.reset_n
+		.btn_pio_export       (<connected-to-btn_pio_export>),       //   btn_pio.export
+		.clk_clk              (<connected-to-clk_clk>),              //       clk.clk
+		.frame_buf_address    (<connected-to-frame_buf_address>),    // frame_buf.address
+		.frame_buf_chipselect (<connected-to-frame_buf_chipselect>), //          .chipselect
+		.frame_buf_clken      (<connected-to-frame_buf_clken>),      //          .clken
+		.frame_buf_write      (<connected-to-frame_buf_write>),      //          .write
+		.frame_buf_readdata   (<connected-to-frame_buf_readdata>),   //          .readdata
+		.frame_buf_writedata  (<connected-to-frame_buf_writedata>),  //          .writedata
+		.frame_buf_byteenable (<connected-to-frame_buf_byteenable>), //          .byteenable
+		.reset_reset_n        (<connected-to-reset_reset_n>)         //     reset.reset_n
 	);
 

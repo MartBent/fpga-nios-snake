@@ -101,7 +101,7 @@ ACDS_VERSION := 21.1
 # BUILD_NUMBER: 842
 
 SETTINGS_FILE := settings.bsp
-SOPC_FILE := /home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/fpga-nios-snake/system.sopcinfo
+SOPC_FILE := ../../system.sopcinfo
 
 #-------------------------------------------------------------------------------
 #                             TOOL & COMMAND DEFINITIONS

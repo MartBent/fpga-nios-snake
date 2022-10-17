@@ -2,9 +2,9 @@
  * linker.x - Linker script
  *
  * Machine generated for CPU 'cpu' in SOPC Builder design 'system'
- * SOPC Builder design path: /home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/fpga-nios-snake/system.sopcinfo
+ * SOPC Builder design path: ../../system.sopcinfo
  *
- * Generated: Wed Oct 12 21:30:20 CEST 2022
+ * Generated: Thu Oct 13 14:31:03 CEST 2022
  */
 
 /*
@@ -50,12 +50,14 @@
 
 MEMORY
 {
-    reset : ORIGIN = 0x80000, LENGTH = 32
-    memory : ORIGIN = 0x80020, LENGTH = 312112
+    frame_buffer : ORIGIN = 0x100000, LENGTH = 282144
+    reset : ORIGIN = 0x180000, LENGTH = 32
+    memory : ORIGIN = 0x180020, LENGTH = 65504
 }
 
 /* Define symbols for each memory base-address */
-__alt_mem_memory = 0x80000;
+__alt_mem_frame_buffer = 0x100000;
+__alt_mem_memory = 0x180000;
 
 OUTPUT_FORMAT( "elf32-littlenios2",
                "elf32-littlenios2",
@@ -307,7 +309,24 @@ SECTIONS
      *
      */
 
-    .memory LOADADDR (.bss) + SIZEOF (.bss) : AT ( LOADADDR (.bss) + SIZEOF (.bss) )
+    .frame_buffer : AT ( LOADADDR (.bss) + SIZEOF (.bss) )
+    {
+        PROVIDE (_alt_partition_frame_buffer_start = ABSOLUTE(.));
+        *(.frame_buffer .frame_buffer. frame_buffer.*)
+        . = ALIGN(4);
+        PROVIDE (_alt_partition_frame_buffer_end = ABSOLUTE(.));
+    } > frame_buffer
+
+    PROVIDE (_alt_partition_frame_buffer_load_addr = LOADADDR(.frame_buffer));
+
+    /*
+     *
+     * This section's LMA is set to the .text region.
+     * crt0 will copy to this section's specified mapped region virtual memory address (VMA)
+     *
+     */
+
+    .memory LOADADDR (.frame_buffer) + SIZEOF (.frame_buffer) : AT ( LOADADDR (.frame_buffer) + SIZEOF (.frame_buffer) )
     {
         PROVIDE (_alt_partition_memory_start = ABSOLUTE(.));
         *(.memory .memory. memory.*)
@@ -367,7 +386,7 @@ SECTIONS
 /*
  * Don't override this, override the __alt_stack_* symbols instead.
  */
-__alt_data_end = 0xcc350;
+__alt_data_end = 0x190000;
 
 /*
  * The next two symbols define the location of the default stack.  You can
@@ -383,4 +402,4 @@ PROVIDE( __alt_stack_limit   = __alt_stack_base );
  * Override this symbol to put the heap in a different memory.
  */
 PROVIDE( __alt_heap_start    = end );
-PROVIDE( __alt_heap_limit    = 0xcc350 );
+PROVIDE( __alt_heap_limit    = 0x190000 );

@@ -2,9 +2,9 @@
  * linker.h - Linker script mapping information
  *
  * Machine generated for CPU 'cpu' in SOPC Builder design 'system'
- * SOPC Builder design path: /home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/fpga-nios-snake/system.sopcinfo
+ * SOPC Builder design path: ../../system.sopcinfo
  *
- * Generated: Wed Oct 12 21:30:20 CEST 2022
+ * Generated: Thu Oct 13 14:31:03 CEST 2022
  */
 
 /*
@@ -65,9 +65,11 @@
  *
  */
 
-#define MEMORY_REGION_BASE 0x80020
-#define MEMORY_REGION_SPAN 312112
-#define RESET_REGION_BASE 0x80000
+#define FRAME_BUFFER_REGION_BASE 0x100000
+#define FRAME_BUFFER_REGION_SPAN 282144
+#define MEMORY_REGION_BASE 0x180020
+#define MEMORY_REGION_SPAN 65504
+#define RESET_REGION_BASE 0x180000
 #define RESET_REGION_SPAN 32
 
 

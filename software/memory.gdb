@@ -1,9 +1,9 @@
 # memory.gdb - GDB memory region definitions
 #
 # Machine generated for CPU 'cpu' in SOPC Builder design 'system'
-# SOPC Builder design path: /home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/fpga-nios-snake/system.sopcinfo
+# SOPC Builder design path: ../../system.sopcinfo
 #
-# Generated: Wed Oct 12 21:30:20 CEST 2022
+# Generated: Thu Oct 13 14:31:03 CEST 2022
 
 # DO NOT MODIFY THIS FILE
 #
@@ -46,5 +46,8 @@
 # The cache attribute is specified which improves GDB performance
 # by allowing GDB to cache memory contents on the host.
 
+# frame_buffer
+memory 0x100000 0x144e20 cache
+
 # memory
-memory 0x80000 0xcc350 cache
+memory 0x180000 0x190000 cache

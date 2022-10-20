@@ -65,6 +65,9 @@ signal disp_ena : std_logic;
 --Nios II Stuff
 signal mem_data : std_logic_vector(31 downto 0) := (others => '0');
 signal frame_buf_addr : natural range 0 to 65536 := 0;
+signal frame_buf_cs : std_logic := '0';
+signal frame_buf_byte_enable : std_logic_vector(3 downto 0) := "0000";
+signal frame_buf_addr_vec : std_logic_vector(16 downto 0) := "00000000000000000";
 
 BEGIN
 	
@@ -73,9 +76,11 @@ BEGIN
 	u2: system port map(btn_pio_export => btn, 
 							  clk_clk => clk_138, 
 							  reset_reset_n => '1', 
-							  frame_buf_address => std_logic_vector(to_unsigned(frame_buf_addr, 17)), 
+							  frame_buf_clken => '1',
+							  frame_buf_address => frame_buf_addr_vec, 
 							  frame_buf_readdata => mem_data,
-							  frame_buf_chipselect => '0'
+							  frame_buf_chipselect => frame_buf_cs,
+							  frame_buf_byteenable => frame_buf_byte_enable
 							  );
 	
 	pixel_clk <= clk_138;
@@ -86,10 +91,12 @@ BEGIN
 	
 	BEGIN
 	IF rising_edge(clk_138) then
+		frame_buf_cs <= '0';
 		IF disp_ena = '1' then
-			--IF((row > 256) and (row < 256+512) and (column > 320) and (column < 320+512)) THEN --Inside game screen
+			--IF((row > 526) and (row < 526+512) and (column > 322) and (column < 322+511)) THEN --Inside game screen
 				case count is
 					when 0 =>
+						frame_buf_byte_enable <= "0000";
 						red <= mem_data(31 downto 24);
 						blue <= mem_data(31 downto 24);
 						green <= mem_data(31 downto 24);
@@ -104,13 +111,19 @@ BEGIN
 						green <= mem_data(15 downto 8);
 						blue <= mem_data(15 downto 8);
 						count := 3;
-						if(frame_buf_addr = 65535) then
+												
+						frame_buf_cs <= '1';
+						frame_buf_byte_enable <= "1111";
+						
+						if(frame_buf_addr > 65535) then
 						frame_buf_addr <= 0;
 						else
 							frame_buf_addr <= frame_buf_addr + 1;
 						end if;
+						frame_buf_addr_vec <= std_logic_vector(to_unsigned(frame_buf_addr, 17));
+						
 					when 3 =>
-						red <= mem_data(7 downto 0);
+						red <= mem_data(7 downto 0);	
 						green <= mem_data(7 downto 0);
 						blue <= mem_data(7 downto 0);
 						count := 0;

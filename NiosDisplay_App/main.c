@@ -15,26 +15,11 @@
 
 void delay(unsigned long msec)
 {
-    usleep(msec);
+    usleep(msec*1000);
 }
 
 void display_flush(const u8* grid, const unsigned long resolution) {
-    for (u8 i = 0; i < resolution; i++) {
-        printf("-");
-    }
-    printf("\n");
-    for (u8 i = 0; i < resolution; i++) {
-        printf("|");
-        for (u8 j = 0; j < resolution; j++) {
-            printf("%c", *(u8*)(grid+(resolution*i)+j));
-        }
-        printf("|");
-        printf("\n");
-    }
-    for (u8 i = 0; i < resolution; i++) {
-        printf("-");
-    }
-    printf("\n");
+    //memcpy(FRAME_BUFFER_BASE, grid, resolution*resolution);
 }
 u8 rnd() {
     return rand() % 32;
@@ -66,25 +51,23 @@ direction_t read_direction() {
 }
 
 int main(void) {
+	u8* addr = FRAME_BUFFER_BASE;
 
-	u8* addr = FRAME_BUFFER_BASE; //Starting point of the video buffer
 	u8 color = 255;
 
-	*addr = 255;
-	*(addr+1) = 0;
-	*(addr+2) = 0;
-	*(addr+3) = 255;
+	for(int i = 0; i < 512*512; i++) {
+		*(addr+i)=0x00;
+	}
+	usleep(100000);
+	printf("Print\n");
+	for(int i = 0; i < 512; i++) {
 
-	while(1){}
-
-	for(int i = 0; i < 128; i++) {
-
-		for(int j = 0; j < 128; j++) {
+		for(int j = 0; j < 512; j++) {
 				*(addr+(i*512)+j) =  color;
 		}
 		color = (color == 255) ? 0 : 255;
 	}
-
+	while(1){}
 	srand(time(NULL));
 
 	snake_driver_t driver;
@@ -95,7 +78,7 @@ int main(void) {
 	driver.read_direction_cb = read_direction;
 	driver.resolution = 512;
 	driver.snake_length = 16;
-	driver.frame_buffer = addr;
+	driver.frame_buffer = FRAME_BUFFER_BASE;
 	printf("start snake\n");
 	snake_play(&driver);
 	printf("err\n");

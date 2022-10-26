@@ -5,24 +5,26 @@
 #include "snake.h"
 
 void clear_buffer(const snake_driver_t* driver) {
-    for(u8 x = 0; x < driver->resolution; x++) {
-        for(u8 y = 0; y < driver->resolution; y++) {
-            *(u8*)(driver->frame_buffer+(driver->resolution*x)+y) = 0x00;
-        }
-    }
+	memset(driver->frame_buffer, 0x00, driver->resolution*driver->resolution);
 }
 
-void draw_square(const snake_driver_t* driver, point_t location) {
+void draw_square(const snake_driver_t* driver, point_t location, u8 color) {
     //Location is valid
     const unsigned int square_size = driver->resolution / 32;
     const unsigned int square_diameter = square_size / 2;
 
+    const uint16_t left_x_bounds = location.x*square_size - square_diameter;
+    const uint16_t right_x_bounds = location.x*square_size + square_diameter;
+
+    const uint16_t upper_y_bounds = location.y*square_size - square_diameter;
+	const uint16_t lower_y_bounds = location.y*square_size + square_diameter;
+
+
     if(location.x < SIZE && location.y < SIZE) {
-        for(u8 x = 0; x < driver->resolution; x++) {
-            for(u8 y = 0; y < driver->resolution; y++) {
-                if(is_between(location.x*square_size - square_diameter, location.x*square_size  + square_diameter, x) && 
-                   is_between(location.y*square_size - square_diameter, location.y*square_size  + square_diameter, y)) {
-                    *(u8*)(driver->frame_buffer+(driver->resolution*x)+y) = 0xFF;
+        for(uint32_t x = 0; x < driver->resolution; x++) {
+            for(uint32_t y = 0; y < driver->resolution; y++) {
+                if(is_between(left_x_bounds, right_x_bounds, x) && is_between(upper_y_bounds, lower_y_bounds, y)) {
+                    *(u8*)(driver->frame_buffer+(driver->resolution*x)+y) = color;
                 }
             }
         }
@@ -58,7 +60,8 @@ void move_snake(const snake_driver_t* driver, snake_t* snake) {
         }
     }
 
-    memmove(&snake->point_history[1], &snake->point_history[0], (driver->snake_length-1)*sizeof(point_t));
+    //Shift the points
+    memmove(&snake->point_history[1], &snake->point_history[0], 32*sizeof(point_t));
     snake->point_history[0] = snake->current_location;
 }
 
@@ -93,20 +96,18 @@ void snake_play(const snake_driver_t* driver) {
         driver->random_number_cb()
     };
 
-    while(1) {
+    clear_buffer(driver);
+    draw_square(driver, current_food, 0x5A);
 
+    while(1) {
         direction_t direction = driver->read_direction_cb();
-        if(filter_direction(snake.current_direction, direction)) {
-        	snake.current_direction = direction;
-        }
-        
-        clear_buffer(driver);
+		snake.current_direction = filter_direction(snake.current_direction, direction);
+
+		draw_square(driver, snake.point_history[snake.length], 0x00);
 
         for(int i = 0; i < snake.length; i++) {
-            draw_square(driver, snake.point_history[i]);
+            draw_square(driver, snake.point_history[i], 0xFF);
         }
-
-        draw_square(driver, current_food);
 
         driver->display_frame_cb((const u8*)driver->frame_buffer, driver->resolution);
         driver->display_score_cb(snake.length);
@@ -114,18 +115,20 @@ void snake_play(const snake_driver_t* driver) {
         //Move snake
         move_snake(driver, &snake);
 
-        //Detect collision with food / snake
+        //Detect collision with snake
         if(detect_collision_snake(&snake)) {
             driver->delay_function_cb(10000);
         }
 
+        //Detect collision food
         if(point_t_equals(snake.current_location, current_food)) {
             snake.length += 1;
             current_food.x = driver->random_number_cb();
             current_food.y = driver->random_number_cb();
+            draw_square(driver, current_food, 0x5A);
         }
 
-        //Process any food
+        //Delay
         driver->delay_function_cb(200);
     }   
 }

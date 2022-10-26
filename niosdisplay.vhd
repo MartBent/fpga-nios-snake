@@ -88,56 +88,63 @@ BEGIN
 	draw_pixel : PROCESS(clk_138)
 	
 	variable count : natural range 0 to 4 := 0;
+	variable busy : std_logic := '0';
 	
 	BEGIN
 	IF rising_edge(clk_138) then
+	
 		frame_buf_cs <= '0';
+		
+		if(row = 256 and column = 320) then --Reset pixel
+			frame_buf_cs <= '1';
+			frame_buf_byte_enable <= "1111";
+			frame_buf_addr <= 0;
+			frame_buf_addr_vec <= std_logic_vector(to_unsigned(frame_buf_addr, 17));
+			count := 0;
+		end if;
+		
 		IF disp_ena = '1' then
-			--IF((row > 526) and (row < 526+512) and (column > 322) and (column < 322+511)) THEN --Inside game screen
+			IF((row > 255) and (row < 255+513) and (column > 319) and (column < 319+513)) THEN --Inside game screen
 				case count is
 					when 0 =>
 						frame_buf_byte_enable <= "0000";
 						red <= mem_data(31 downto 24);
 						blue <= mem_data(31 downto 24);
 						green <= mem_data(31 downto 24);
-						count := 1;
+						count := 1;	
 					when 1 =>
 						red <= mem_data(23 downto 16);
 						green <= mem_data(23 downto 16);
 						blue <= mem_data(23 downto 16);
-						count := 2;
+						count := 2;	
 					when 2 =>
 						red <= mem_data(15 downto 8);
 						green <= mem_data(15 downto 8);
 						blue <= mem_data(15 downto 8);
 						count := 3;
-												
+						
 						frame_buf_cs <= '1';
 						frame_buf_byte_enable <= "1111";
-						
-						if(frame_buf_addr > 65535) then
-						frame_buf_addr <= 0;
-						else
-							frame_buf_addr <= frame_buf_addr + 1;
-						end if;
+					
+						frame_buf_addr <= frame_buf_addr + 1;
 						frame_buf_addr_vec <= std_logic_vector(to_unsigned(frame_buf_addr, 17));
-						
 					when 3 =>
 						red <= mem_data(7 downto 0);	
 						green <= mem_data(7 downto 0);
 						blue <= mem_data(7 downto 0);
 						count := 0;
 					when others =>
-						red <= mem_data(31 downto 24);
-						green <= mem_data(31 downto 24);
-						blue <= mem_data(31 downto 24);					
+						red <= (OTHERS => '0');
+						green <= (OTHERS => '0');
+						blue <= (OTHERS => '0');				
 				end case;
-			--ELSE --Gray color to boundary
-				--red <= "11111001";
-				--green <= "10101001";
-				--blue <= "10101001";
-			--END IF;
+			ELSE --Gray color to boundary
+				red <= "11111001";
+				green <= "10101001";
+				blue <= "10101001";
+			END IF;
 		ELSE					
+			frame_buf_byte_enable <= "0000"; --Needed for when the last word of a row is read out.
 			red <= (OTHERS => '0');
 			green <= (OTHERS => '0');
 			blue <= (OTHERS => '0');

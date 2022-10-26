@@ -27,6 +27,6 @@ typedef struct {
 } snake_t;
 
 bool point_t_equals(const point_t rhs, const point_t lhs);
-bool is_between(u8 min, u8 max, u8 val);
+bool is_between(uint16_t min, uint16_t max, uint16_t val);
 
 #endif

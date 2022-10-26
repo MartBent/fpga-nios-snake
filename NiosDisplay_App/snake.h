@@ -18,7 +18,7 @@ typedef direction_t (*readDirectionFunction)();
 typedef u8 (*randomNumberFunction)();
 
 typedef struct {
-    unsigned int resolution;
+    uint32_t resolution;
     u8* frame_buffer;
     u8 snake_length;
     delayFunction delay_function_cb;
@@ -29,7 +29,7 @@ typedef struct {
 } snake_driver_t;
 
 void clear_buffer(const snake_driver_t* driver);
-void draw_square(const snake_driver_t* driver, point_t location);
+void draw_square(const snake_driver_t* driver, point_t location, u8 color);
 
 bool detect_collision_snake(const snake_t* snake);
 void move_snake(const snake_driver_t* driver, snake_t* snake);

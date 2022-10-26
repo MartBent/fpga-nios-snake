@@ -15,11 +15,11 @@
 
 void delay(unsigned long msec)
 {
-    usleep(msec*1000);
+    //usleep(msec*1000);
 }
 
 void display_flush(const u8* grid, const unsigned long resolution) {
-    //memcpy(FRAME_BUFFER_BASE, grid, resolution*resolution);
+    memcpy(FRAME_BUFFER_BASE, grid, resolution*resolution);
 }
 u8 rnd() {
     return rand() % 32;
@@ -51,24 +51,7 @@ direction_t read_direction() {
 }
 
 int main(void) {
-	u8* addr = FRAME_BUFFER_BASE;
-
-	u8 color = 255;
-
-	for(int i = 0; i < 512*512; i++) {
-		*(addr+i)=0x00;
-	}
-	usleep(100000);
-	printf("Print\n");
-	for(int i = 0; i < 512; i++) {
-
-		for(int j = 0; j < 512; j++) {
-				*(addr+(i*512)+j) =  color;
-		}
-		color = (color == 255) ? 0 : 255;
-	}
-	while(1){}
-	srand(time(NULL));
+	srand(1235);
 
 	snake_driver_t driver;
 	driver.delay_function_cb = delay;

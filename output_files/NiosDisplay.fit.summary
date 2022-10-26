@@ -1,0 +1,20 @@
+Fitter Status : Successful - Wed Oct 26 13:28:39 2022
+Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
+Revision Name : NiosDisplay
+Top-level Entity Name : niosdisplay
+Family : Cyclone V
+Device : 5CSEMA5F31C6
+Timing Models : Final
+Logic utilization (in ALMs) : 1,513 / 32,070 ( 5 % )
+Total registers : 2650
+Total pins : 35 / 457 ( 8 % )
+Total virtual pins : 0
+Total block memory bits : 2,803,968 / 4,065,280 ( 69 % )
+Total RAM Blocks : 360 / 397 ( 91 % )
+Total DSP Blocks : 0 / 87 ( 0 % )
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 1 / 6 ( 17 % )
+Total DLLs : 0 / 4 ( 0 % )

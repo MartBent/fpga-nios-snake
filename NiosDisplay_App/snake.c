@@ -47,7 +47,7 @@ void move_snake(const snake_driver_t* driver, snake_t* snake) {
             break;
         }
         case up: {
-            snake->current_location.y = snake->current_location.y == 0 ? SIZE-1 : snake->current_location.y - 1;
+            snake->current_location.y = snake->current_location.y == 1 ? SIZE-1 : snake->current_location.y - 1;
             break;
         }
         case right: {
@@ -55,7 +55,7 @@ void move_snake(const snake_driver_t* driver, snake_t* snake) {
             break;
         }
         case left: {
-            snake->current_location.x = snake->current_location.x == 0 ? SIZE-1 : snake->current_location.x - 1;
+            snake->current_location.x = snake->current_location.x == 1 ? SIZE-1 : snake->current_location.x - 1;
             break;
         }
     }
@@ -100,33 +100,44 @@ void snake_play(const snake_driver_t* driver) {
     draw_square(driver, current_food, 0x5A);
 
     while(1) {
+
         direction_t direction = driver->read_direction_cb();
 		snake.current_direction = filter_direction(snake.current_direction, direction);
 
-		draw_square(driver, snake.point_history[snake.length], 0x00);
+    	//Move snake
+		move_snake(driver, &snake);
 
-        for(int i = 0; i < snake.length; i++) {
-            draw_square(driver, snake.point_history[i], 0xFF);
-        }
+		//Detect collision with snake
+		if(detect_collision_snake(&snake)) {
+			driver->delay_function_cb(10000);
+		}
+
+    	 //Detect collision food
+		if(point_t_equals(snake.current_location, current_food)) {
+			snake.length += 1;
+			draw_square(driver, snake.point_history[0], 0xFF);
+			current_food.x = driver->random_number_cb();
+			current_food.y = driver->random_number_cb();
+			bool valid = false;
+			while(!valid) {
+				for(int i = 0; i < snake.length; i++) {
+					if(point_t_equals(snake.point_history[i], current_food)) {
+						valid = false;
+						current_food.x = driver->random_number_cb();
+						current_food.y = driver->random_number_cb();
+						break;
+					}
+				}
+				valid = true;
+			}
+			draw_square(driver, current_food, 0x5A);
+		}
+
+		draw_square(driver, snake.point_history[snake.length], 0x00);
+		draw_square(driver, snake.point_history[0], 0xFF);
 
         driver->display_frame_cb((const u8*)driver->frame_buffer, driver->resolution);
         driver->display_score_cb(snake.length);
-
-        //Move snake
-        move_snake(driver, &snake);
-
-        //Detect collision with snake
-        if(detect_collision_snake(&snake)) {
-            driver->delay_function_cb(10000);
-        }
-
-        //Detect collision food
-        if(point_t_equals(snake.current_location, current_food)) {
-            snake.length += 1;
-            current_food.x = driver->random_number_cb();
-            current_food.y = driver->random_number_cb();
-            draw_square(driver, current_food, 0x5A);
-        }
 
         //Delay
         driver->delay_function_cb(200);

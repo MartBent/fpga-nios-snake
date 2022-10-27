@@ -88,7 +88,6 @@ BEGIN
 	draw_pixel : PROCESS(clk_138)
 	
 	variable count : natural range 0 to 4 := 0;
-	variable busy : std_logic := '0';
 	
 	BEGIN
 	IF rising_edge(clk_138) then

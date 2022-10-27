@@ -28,6 +28,7 @@ typedef struct {
     randomNumberFunction random_number_cb;
 } snake_driver_t;
 
+void draw_game_over(const snake_driver_t* driver);
 void fill_buffer(const snake_driver_t* driver, u8 color);
 void draw_square(const snake_driver_t* driver, point_t location, u8 color);
 

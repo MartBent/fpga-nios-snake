@@ -4,6 +4,42 @@
 
 #include "snake.h"
 
+
+void draw_game_over(const snake_driver_t* driver) {
+	const u8 game_over_points_x[96] = {
+			2,2,2,2,2,2,2,2,2,2,2,
+			3,3,3,3,3,3,3,3,
+			4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+			5,5,5,5,5,
+			6,6,6,6,6,6,6,6,6,6,6,6,
+			10,10,10,10,10,10,10,10,10,
+			11,11,11,11,11,11,11,
+			12,12,12,12,12,12,12,12,12,12,
+			13,13,13,13,13,13,13,
+			14,14,14,14,14,14,14
+	};
+	const u8 game_over_points_y[96] = {
+			5,6,7,13,14,19,23,27,28,29,30,
+			4,12,15,19,20,22,23,27,
+			4,6,7,8,12,13,14,15,19,21,23,27,28,29,
+			4,8,9,15,19,23,27,
+			5,6,7,8,12,15,19,23,27,28,29,30,
+
+			5,6,12,14,19,20,21,22,27,28,29,
+			4,7,12,14,19,27,30,
+			4,7,12,14,19,20,21,27,28,29,
+			4,7,12,14,19,27,29,
+			5,6,13,19,20,21,22,27,30
+	};
+	fill_buffer(driver, 0x00);
+	for(int i = 0; i < 80; i++) {
+		point_t point = {
+				.x = game_over_points_x[i],
+				.y = game_over_points_y[i]
+		};
+		draw_square(driver,point, 0xFF);
+	}
+}
 void fill_buffer(const snake_driver_t* driver, u8 color) {
 	memset(driver->frame_buffer, color, driver->resolution*driver->resolution);
 }
@@ -118,8 +154,8 @@ char* snake_play(const snake_driver_t* driver) {
 
 		//Detect collision with snake
 		if(detect_collision_snake(&snake)) {
-			fill_buffer(driver, 0x00);
-			driver->delay_function_cb(5000);
+			draw_game_over(driver);
+			driver->delay_function_cb(15000);
 			return "Game over, you lost!\n";
 		}
 
@@ -128,6 +164,9 @@ char* snake_play(const snake_driver_t* driver) {
 			snake.length += 1;
 			draw_square(driver, snake.point_history[0], 0xFF);
 			if(snake.length == driver->snake_length) {
+
+				draw_game_over(driver);
+				driver->delay_function_cb(15000);
 				return "Game over, you won!\n";
 			}
 			current_food.x = driver->random_number_cb();

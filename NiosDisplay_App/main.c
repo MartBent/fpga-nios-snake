@@ -1,17 +1,14 @@
-/*
-* main.c
-*
-* Created on: Oct 17, 2017
-* Author: chris @ Saxion
-*/
+#include "sys/alt_irq.h"
 #include "alt_types.h"
 #include "altera_avalon_pio_regs.h"
 #include "system.h"
 #include <stdio.h>
-#include <time.h>
 #include <unistd.h>
-
+#include "sys/alt_irq.h"
 #include "snake.h"
+
+volatile int edge_capture;
+static direction_t direction = down;
 
 void delay(unsigned long msec)
 {
@@ -19,7 +16,7 @@ void delay(unsigned long msec)
 }
 
 void display_flush(const u8* grid, const unsigned long resolution) {
-    memcpy(FRAME_BUFFER_BASE, grid, resolution*resolution);
+    //memcpy(FRAME_BUFFER_BASE, grid, resolution*resolution);
 }
 u8 rnd() {
     return rand() % 32;
@@ -30,27 +27,44 @@ void display_score(u8 score) {
 }
 
 direction_t read_direction() {
-	//Read IOs
-	static direction_t direction = down;
-
-	uint8_t data = IORD_ALTERA_AVALON_PIO_DATA(BTN_PIO_BASE);
-
-	if(data == 11) {
-		direction = right;
-	}
-	else if(data == 7) {
-		direction = up;
-	}
-	else if(data == 14) {
-		direction = down;
-	}
-	else if(data == 13) {
-		direction = left;
-	}
+	printf("%d", direction);
     return direction;
 }
 
+static void interrupt(void* c) {
+	volatile int* edge_capture_ptr = (volatile int*)c;
+	*edge_capture_ptr = IORD_ALTERA_AVALON_PIO_EDGE_CAP(BTN_PIO_BASE);
+	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(BTN_PIO_BASE, 0);
+
+	//Direction are calculated differently because the frame is rotated
+	switch(edge_capture) {
+		case 8:
+			printf("Left");
+			direction = up;
+			break;
+		case 4:
+			printf("Down");
+			direction = right;
+			break;
+		case 2:
+			printf("Up");
+			direction = left;
+			break;
+		case 1:
+			printf("Right");
+			direction = down;
+			break;
+	}
+	//No debounce required in this particular application
+}
+
 int main(void) {
+
+	IOWR_ALTERA_AVALON_PIO_IRQ_MASK(BTN_PIO_BASE, 0xf);
+	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(BTN_PIO_BASE, 0x0);
+	void* edge_capture_ptr = (void*) &edge_capture;
+	alt_ic_isr_register(BTN_PIO_IRQ_INTERRUPT_CONTROLLER_ID, BTN_PIO_IRQ, interrupt, edge_capture_ptr, NULL);
+
 	srand(1235);
 
 	snake_driver_t driver;

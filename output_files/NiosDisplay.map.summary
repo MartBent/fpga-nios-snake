@@ -1,10 +1,10 @@
-Analysis & Synthesis Status : Successful - Wed Oct 26 13:26:24 2022
+Analysis & Synthesis Status : Successful - Thu Oct 27 15:45:41 2022
 Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 Revision Name : NiosDisplay
 Top-level Entity Name : niosdisplay
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 2528
+Total registers : 2546
 Total pins : 35
 Total virtual pins : 0
 Total block memory bits : 2,803,968

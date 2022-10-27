@@ -24,11 +24,15 @@ end entity system;
 architecture rtl of system is
 	component system_btn_pio is
 		port (
-			clk      : in  std_logic                     := 'X';             -- clk
-			reset_n  : in  std_logic                     := 'X';             -- reset_n
-			address  : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
-			readdata : out std_logic_vector(31 downto 0);                    -- readdata
-			in_port  : in  std_logic_vector(3 downto 0)  := (others => 'X')  -- export
+			clk        : in  std_logic                     := 'X';             -- clk
+			reset_n    : in  std_logic                     := 'X';             -- reset_n
+			address    : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
+			write_n    : in  std_logic                     := 'X';             -- write_n
+			writedata  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			chipselect : in  std_logic                     := 'X';             -- chipselect
+			readdata   : out std_logic_vector(31 downto 0);                    -- readdata
+			in_port    : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- export
+			irq        : out std_logic                                         -- irq
 		);
 	end component system_btn_pio;
 
@@ -37,7 +41,7 @@ architecture rtl of system is
 			clk                                 : in  std_logic                     := 'X';             -- clk
 			reset_n                             : in  std_logic                     := 'X';             -- reset_n
 			reset_req                           : in  std_logic                     := 'X';             -- reset_req
-			d_address                           : out std_logic_vector(21 downto 0);                    -- address
+			d_address                           : out std_logic_vector(19 downto 0);                    -- address
 			d_byteenable                        : out std_logic_vector(3 downto 0);                     -- byteenable
 			d_read                              : out std_logic;                                        -- read
 			d_readdata                          : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
@@ -45,7 +49,7 @@ architecture rtl of system is
 			d_write                             : out std_logic;                                        -- write
 			d_writedata                         : out std_logic_vector(31 downto 0);                    -- writedata
 			debug_mem_slave_debugaccess_to_roms : out std_logic;                                        -- debugaccess
-			i_address                           : out std_logic_vector(21 downto 0);                    -- address
+			i_address                           : out std_logic_vector(19 downto 0);                    -- address
 			i_read                              : out std_logic;                                        -- read
 			i_readdata                          : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			i_waitrequest                       : in  std_logic                     := 'X';             -- waitrequest
@@ -134,7 +138,7 @@ architecture rtl of system is
 		port (
 			clk138_clk_clk                        : in  std_logic                     := 'X';             -- clk
 			cpu_reset_reset_bridge_in_reset_reset : in  std_logic                     := 'X';             -- reset
-			cpu_data_master_address               : in  std_logic_vector(21 downto 0) := (others => 'X'); -- address
+			cpu_data_master_address               : in  std_logic_vector(19 downto 0) := (others => 'X'); -- address
 			cpu_data_master_waitrequest           : out std_logic;                                        -- waitrequest
 			cpu_data_master_byteenable            : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- byteenable
 			cpu_data_master_read                  : in  std_logic                     := 'X';             -- read
@@ -142,12 +146,15 @@ architecture rtl of system is
 			cpu_data_master_write                 : in  std_logic                     := 'X';             -- write
 			cpu_data_master_writedata             : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
 			cpu_data_master_debugaccess           : in  std_logic                     := 'X';             -- debugaccess
-			cpu_instruction_master_address        : in  std_logic_vector(21 downto 0) := (others => 'X'); -- address
+			cpu_instruction_master_address        : in  std_logic_vector(19 downto 0) := (others => 'X'); -- address
 			cpu_instruction_master_waitrequest    : out std_logic;                                        -- waitrequest
 			cpu_instruction_master_read           : in  std_logic                     := 'X';             -- read
 			cpu_instruction_master_readdata       : out std_logic_vector(31 downto 0);                    -- readdata
 			btn_pio_s1_address                    : out std_logic_vector(1 downto 0);                     -- address
+			btn_pio_s1_write                      : out std_logic;                                        -- write
 			btn_pio_s1_readdata                   : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			btn_pio_s1_writedata                  : out std_logic_vector(31 downto 0);                    -- writedata
+			btn_pio_s1_chipselect                 : out std_logic;                                        -- chipselect
 			cpu_debug_mem_slave_address           : out std_logic_vector(8 downto 0);                     -- address
 			cpu_debug_mem_slave_write             : out std_logic;                                        -- write
 			cpu_debug_mem_slave_read              : out std_logic;                                        -- read
@@ -191,6 +198,7 @@ architecture rtl of system is
 			reset         : in  std_logic                     := 'X'; -- reset
 			receiver0_irq : in  std_logic                     := 'X'; -- irq
 			receiver1_irq : in  std_logic                     := 'X'; -- irq
+			receiver2_irq : in  std_logic                     := 'X'; -- irq
 			sender_irq    : out std_logic_vector(31 downto 0)         -- irq
 		);
 	end component system_irq_mapper;
@@ -264,14 +272,14 @@ architecture rtl of system is
 	signal cpu_data_master_readdata                                 : std_logic_vector(31 downto 0); -- mm_interconnect_0:cpu_data_master_readdata -> cpu:d_readdata
 	signal cpu_data_master_waitrequest                              : std_logic;                     -- mm_interconnect_0:cpu_data_master_waitrequest -> cpu:d_waitrequest
 	signal cpu_data_master_debugaccess                              : std_logic;                     -- cpu:debug_mem_slave_debugaccess_to_roms -> mm_interconnect_0:cpu_data_master_debugaccess
-	signal cpu_data_master_address                                  : std_logic_vector(21 downto 0); -- cpu:d_address -> mm_interconnect_0:cpu_data_master_address
+	signal cpu_data_master_address                                  : std_logic_vector(19 downto 0); -- cpu:d_address -> mm_interconnect_0:cpu_data_master_address
 	signal cpu_data_master_byteenable                               : std_logic_vector(3 downto 0);  -- cpu:d_byteenable -> mm_interconnect_0:cpu_data_master_byteenable
 	signal cpu_data_master_read                                     : std_logic;                     -- cpu:d_read -> mm_interconnect_0:cpu_data_master_read
 	signal cpu_data_master_write                                    : std_logic;                     -- cpu:d_write -> mm_interconnect_0:cpu_data_master_write
 	signal cpu_data_master_writedata                                : std_logic_vector(31 downto 0); -- cpu:d_writedata -> mm_interconnect_0:cpu_data_master_writedata
 	signal cpu_instruction_master_readdata                          : std_logic_vector(31 downto 0); -- mm_interconnect_0:cpu_instruction_master_readdata -> cpu:i_readdata
 	signal cpu_instruction_master_waitrequest                       : std_logic;                     -- mm_interconnect_0:cpu_instruction_master_waitrequest -> cpu:i_waitrequest
-	signal cpu_instruction_master_address                           : std_logic_vector(21 downto 0); -- cpu:i_address -> mm_interconnect_0:cpu_instruction_master_address
+	signal cpu_instruction_master_address                           : std_logic_vector(19 downto 0); -- cpu:i_address -> mm_interconnect_0:cpu_instruction_master_address
 	signal cpu_instruction_master_read                              : std_logic;                     -- cpu:i_read -> mm_interconnect_0:cpu_instruction_master_read
 	signal mm_interconnect_0_jtag_avalon_jtag_slave_chipselect      : std_logic;                     -- mm_interconnect_0:jtag_avalon_jtag_slave_chipselect -> jtag:av_chipselect
 	signal mm_interconnect_0_jtag_avalon_jtag_slave_readdata        : std_logic_vector(31 downto 0); -- jtag:av_readdata -> mm_interconnect_0:jtag_avalon_jtag_slave_readdata
@@ -300,8 +308,11 @@ architecture rtl of system is
 	signal mm_interconnect_0_memory_s1_write                        : std_logic;                     -- mm_interconnect_0:memory_s1_write -> memory:write
 	signal mm_interconnect_0_memory_s1_writedata                    : std_logic_vector(31 downto 0); -- mm_interconnect_0:memory_s1_writedata -> memory:writedata
 	signal mm_interconnect_0_memory_s1_clken                        : std_logic;                     -- mm_interconnect_0:memory_s1_clken -> memory:clken
+	signal mm_interconnect_0_btn_pio_s1_chipselect                  : std_logic;                     -- mm_interconnect_0:btn_pio_s1_chipselect -> btn_pio:chipselect
 	signal mm_interconnect_0_btn_pio_s1_readdata                    : std_logic_vector(31 downto 0); -- btn_pio:readdata -> mm_interconnect_0:btn_pio_s1_readdata
 	signal mm_interconnect_0_btn_pio_s1_address                     : std_logic_vector(1 downto 0);  -- mm_interconnect_0:btn_pio_s1_address -> btn_pio:address
+	signal mm_interconnect_0_btn_pio_s1_write                       : std_logic;                     -- mm_interconnect_0:btn_pio_s1_write -> mm_interconnect_0_btn_pio_s1_write:in
+	signal mm_interconnect_0_btn_pio_s1_writedata                   : std_logic_vector(31 downto 0); -- mm_interconnect_0:btn_pio_s1_writedata -> btn_pio:writedata
 	signal mm_interconnect_0_frame_buffer_s1_chipselect             : std_logic;                     -- mm_interconnect_0:frame_buffer_s1_chipselect -> frame_buffer:chipselect
 	signal mm_interconnect_0_frame_buffer_s1_readdata               : std_logic_vector(31 downto 0); -- frame_buffer:readdata -> mm_interconnect_0:frame_buffer_s1_readdata
 	signal mm_interconnect_0_frame_buffer_s1_address                : std_logic_vector(16 downto 0); -- mm_interconnect_0:frame_buffer_s1_address -> frame_buffer:address
@@ -311,6 +322,7 @@ architecture rtl of system is
 	signal mm_interconnect_0_frame_buffer_s1_clken                  : std_logic;                     -- mm_interconnect_0:frame_buffer_s1_clken -> frame_buffer:clken
 	signal irq_mapper_receiver0_irq                                 : std_logic;                     -- jtag:av_irq -> irq_mapper:receiver0_irq
 	signal irq_mapper_receiver1_irq                                 : std_logic;                     -- sys_clk_timer:irq -> irq_mapper:receiver1_irq
+	signal irq_mapper_receiver2_irq                                 : std_logic;                     -- btn_pio:irq -> irq_mapper:receiver2_irq
 	signal cpu_irq_irq                                              : std_logic_vector(31 downto 0); -- irq_mapper:sender_irq -> cpu:irq
 	signal rst_controller_reset_out_reset                           : std_logic;                     -- rst_controller:reset_out -> [frame_buffer:reset, irq_mapper:reset, memory:reset, mm_interconnect_0:cpu_reset_reset_bridge_in_reset_reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
 	signal rst_controller_reset_out_reset_req                       : std_logic;                     -- rst_controller:reset_req -> [cpu:reset_req, frame_buffer:reset_req, memory:reset_req, rst_translator:reset_req_in]
@@ -319,17 +331,22 @@ architecture rtl of system is
 	signal mm_interconnect_0_jtag_avalon_jtag_slave_read_ports_inv  : std_logic;                     -- mm_interconnect_0_jtag_avalon_jtag_slave_read:inv -> jtag:av_read_n
 	signal mm_interconnect_0_jtag_avalon_jtag_slave_write_ports_inv : std_logic;                     -- mm_interconnect_0_jtag_avalon_jtag_slave_write:inv -> jtag:av_write_n
 	signal mm_interconnect_0_sys_clk_timer_s1_write_ports_inv       : std_logic;                     -- mm_interconnect_0_sys_clk_timer_s1_write:inv -> sys_clk_timer:write_n
+	signal mm_interconnect_0_btn_pio_s1_write_ports_inv             : std_logic;                     -- mm_interconnect_0_btn_pio_s1_write:inv -> btn_pio:write_n
 	signal rst_controller_reset_out_reset_ports_inv                 : std_logic;                     -- rst_controller_reset_out_reset:inv -> [btn_pio:reset_n, cpu:reset_n, jtag:rst_n, sys_clk_timer:reset_n]
 
 begin
 
 	btn_pio : component system_btn_pio
 		port map (
-			clk      => clk_clk,                                  --                 clk.clk
-			reset_n  => rst_controller_reset_out_reset_ports_inv, --               reset.reset_n
-			address  => mm_interconnect_0_btn_pio_s1_address,     --                  s1.address
-			readdata => mm_interconnect_0_btn_pio_s1_readdata,    --                    .readdata
-			in_port  => btn_pio_export                            -- external_connection.export
+			clk        => clk_clk,                                      --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,     --               reset.reset_n
+			address    => mm_interconnect_0_btn_pio_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_0_btn_pio_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_0_btn_pio_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_0_btn_pio_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_0_btn_pio_s1_readdata,        --                    .readdata
+			in_port    => btn_pio_export,                               -- external_connection.export
+			irq        => irq_mapper_receiver2_irq                      --                 irq.irq
 		);
 
 	cpu : component system_cpu
@@ -442,7 +459,10 @@ begin
 			cpu_instruction_master_read           => cpu_instruction_master_read,                          --                                .read
 			cpu_instruction_master_readdata       => cpu_instruction_master_readdata,                      --                                .readdata
 			btn_pio_s1_address                    => mm_interconnect_0_btn_pio_s1_address,                 --                      btn_pio_s1.address
+			btn_pio_s1_write                      => mm_interconnect_0_btn_pio_s1_write,                   --                                .write
 			btn_pio_s1_readdata                   => mm_interconnect_0_btn_pio_s1_readdata,                --                                .readdata
+			btn_pio_s1_writedata                  => mm_interconnect_0_btn_pio_s1_writedata,               --                                .writedata
+			btn_pio_s1_chipselect                 => mm_interconnect_0_btn_pio_s1_chipselect,              --                                .chipselect
 			cpu_debug_mem_slave_address           => mm_interconnect_0_cpu_debug_mem_slave_address,        --             cpu_debug_mem_slave.address
 			cpu_debug_mem_slave_write             => mm_interconnect_0_cpu_debug_mem_slave_write,          --                                .write
 			cpu_debug_mem_slave_read              => mm_interconnect_0_cpu_debug_mem_slave_read,           --                                .read
@@ -485,6 +505,7 @@ begin
 			reset         => rst_controller_reset_out_reset, -- clk_reset.reset
 			receiver0_irq => irq_mapper_receiver0_irq,       -- receiver0.irq
 			receiver1_irq => irq_mapper_receiver1_irq,       -- receiver1.irq
+			receiver2_irq => irq_mapper_receiver2_irq,       -- receiver2.irq
 			sender_irq    => cpu_irq_irq                     --    sender.irq
 		);
 
@@ -560,6 +581,8 @@ begin
 	mm_interconnect_0_jtag_avalon_jtag_slave_write_ports_inv <= not mm_interconnect_0_jtag_avalon_jtag_slave_write;
 
 	mm_interconnect_0_sys_clk_timer_s1_write_ports_inv <= not mm_interconnect_0_sys_clk_timer_s1_write;
+
+	mm_interconnect_0_btn_pio_s1_write_ports_inv <= not mm_interconnect_0_btn_pio_s1_write;
 
 	rst_controller_reset_out_reset_ports_inv <= not rst_controller_reset_out_reset;
 

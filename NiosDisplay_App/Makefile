@@ -1,7 +1,6 @@
 #------------------------------------------------------------------------------
 #              VARIABLES APPENDED TO BY INCLUDED MAKEFILE FRAGMENTS
 #------------------------------------------------------------------------------
-BUILD_PRE_PROCESS := touch $(ELF).srec
 
 # List of include directories for -I compiler option (-I added when used).
 # Includes the BSP.
@@ -128,7 +127,7 @@ CRT0 :=
 SYS_LIB :=
 
 # Define path to the root of the BSP.
-BSP_ROOT_DIR := ../software/
+BSP_ROOT_DIR := ../NiosDisplay_Bsp/
 
 # List of application specific include directories, library directories and library names
 APP_INCLUDE_DIRS :=

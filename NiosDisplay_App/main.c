@@ -12,7 +12,7 @@ static direction_t direction = down;
 
 void delay(unsigned long msec)
 {
-    //usleep(msec*1000);
+    usleep(msec*100);
 }
 
 void display_flush(const u8* grid, const unsigned long resolution) {
@@ -27,7 +27,6 @@ void display_score(u8 score) {
 }
 
 direction_t read_direction() {
-	printf("%d", direction);
     return direction;
 }
 

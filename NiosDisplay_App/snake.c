@@ -13,22 +13,19 @@ void draw_square(const snake_driver_t* driver, point_t location, u8 color) {
     const unsigned int square_size = driver->resolution / 32;
     const unsigned int square_diameter = square_size / 2;
 
-    const uint16_t left_x_bounds = location.x*square_size - square_diameter;
-    const uint16_t right_x_bounds = location.x*square_size + square_diameter;
+    //const uint16_t left_x_bounds = location.x*square_size - square_diameter;
+    //const uint16_t right_x_bounds = location.x*square_size + square_diameter;
 
-    const uint16_t upper_y_bounds = location.y*square_size - square_diameter;
-	const uint16_t lower_y_bounds = location.y*square_size + square_diameter;
+    //const uint16_t upper_y_bounds = location.y*square_size - square_diameter;
+	//const uint16_t lower_y_bounds = location.y*square_size + square_diameter;
 
+	//Calculate the upper left corner of the square.
+	u8* start = driver->frame_buffer + (driver->resolution*location.x*square_size - square_diameter) + (location.y*square_size);
 
-    if(location.x < SIZE && location.y < SIZE) {
-        for(uint32_t x = 0; x < driver->resolution; x++) {
-            for(uint32_t y = 0; y < driver->resolution; y++) {
-                if(is_between(left_x_bounds, right_x_bounds, x) && is_between(upper_y_bounds, lower_y_bounds, y)) {
-                    *(u8*)(driver->frame_buffer+(driver->resolution*x)+y) = color;
-                }
-            }
-        }
-    }
+	for(int i = 0; i < square_size; i++) {
+		memset(start, color, square_size);
+		start += driver->resolution;
+	}
 }
 
 bool detect_collision_snake(const snake_t* snake) {

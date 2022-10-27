@@ -1,5 +1,5 @@
 Fitter report for NiosDisplay
-Thu Oct 27 15:47:53 2022
+Thu Oct 27 17:13:53 2022
 Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 
 
@@ -66,7 +66,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------+
 ; Fitter Summary                                                                ;
 +---------------------------------+---------------------------------------------+
-; Fitter Status                   ; Successful - Thu Oct 27 15:47:53 2022       ;
+; Fitter Status                   ; Successful - Thu Oct 27 17:13:53 2022       ;
 ; Quartus Prime Version           ; 21.1.0 Build 842 10/21/2021 SJ Lite Edition ;
 ; Revision Name                   ; NiosDisplay                                 ;
 ; Top-level Entity Name           ; niosdisplay                                 ;
@@ -156,15 +156,15 @@ https://fpgasoftware.intel.com/eula.
 ; Number detected on machine ; 12          ;
 ; Maximum allowed            ; 6           ;
 ;                            ;             ;
-; Average used               ; 1.39        ;
+; Average used               ; 1.38        ;
 ; Maximum used               ; 6           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   8.7%      ;
-;     Processor 3            ;   8.0%      ;
-;     Processor 4            ;   7.6%      ;
-;     Processor 5            ;   7.3%      ;
+;     Processor 2            ;   8.5%      ;
+;     Processor 3            ;   7.8%      ;
+;     Processor 4            ;   7.5%      ;
+;     Processor 5            ;   7.2%      ;
 ;     Processor 6            ;   7.1%      ;
 +----------------------------+-------------+
 
@@ -2554,8 +2554,8 @@ Info (170195): Router estimated average interconnect usage is 4% of the availabl
     Info (170196): Router estimated peak interconnect usage is 24% of the available device resources in the region that extends from location X22_Y23 to location X32_Y34
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
-Info (170194): Fitter routing operations ending: elapsed time is 00:00:23
-Info (11888): Total time spent on timing analysis during the Fitter is 12.18 seconds.
+Info (170194): Fitter routing operations ending: elapsed time is 00:00:21
+Info (11888): Total time spent on timing analysis during the Fitter is 11.16 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
@@ -2563,10 +2563,10 @@ Info (334004): Delay annotation completed successfully
 Info (11801): Fitter post-fit operations ending: elapsed time is 00:00:15
 Info (144001): Generated suppressed messages file /home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/fpga-nios-snake/output_files/NiosDisplay.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 9 warnings
-    Info: Peak virtual memory: 2271 megabytes
-    Info: Processing ended: Thu Oct 27 15:47:55 2022
-    Info: Elapsed time: 00:01:51
-    Info: Total CPU time (on all processors): 00:05:42
+    Info: Peak virtual memory: 2258 megabytes
+    Info: Processing ended: Thu Oct 27 17:13:55 2022
+    Info: Elapsed time: 00:01:47
+    Info: Total CPU time (on all processors): 00:05:28
 
 
 +----------------------------+

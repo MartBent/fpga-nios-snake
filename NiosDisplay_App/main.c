@@ -12,14 +12,14 @@ static direction_t direction = down;
 
 void delay(unsigned long msec)
 {
-    usleep(msec*100);
+    usleep(msec*300);
 }
 
 void display_flush(const u8* grid, const unsigned long resolution) {
-    //memcpy(FRAME_BUFFER_BASE, grid, resolution*resolution);
+	//Not needed since the frame buffer pointer is passed
 }
 u8 rnd() {
-    return rand() % 32;
+    return rand() % 31;
 }
 
 void display_score(u8 score) {
@@ -38,19 +38,15 @@ static void interrupt(void* c) {
 	//Direction are calculated differently because the frame is rotated
 	switch(edge_capture) {
 		case 8:
-			printf("Left");
 			direction = up;
 			break;
 		case 4:
-			printf("Down");
 			direction = right;
 			break;
 		case 2:
-			printf("Up");
 			direction = left;
 			break;
 		case 1:
-			printf("Right");
 			direction = down;
 			break;
 	}
@@ -65,17 +61,18 @@ int main(void) {
 	alt_ic_isr_register(BTN_PIO_IRQ_INTERRUPT_CONTROLLER_ID, BTN_PIO_IRQ, interrupt, edge_capture_ptr, NULL);
 
 	srand(1235);
-
-	snake_driver_t driver;
-	driver.delay_function_cb = delay;
-	driver.display_frame_cb = display_flush;
-	driver.display_score_cb = display_score;
-	driver.random_number_cb = rnd;
-	driver.read_direction_cb = read_direction;
-	driver.resolution = 512;
-	driver.snake_length = 16;
-	driver.frame_buffer = FRAME_BUFFER_BASE;
-	printf("start snake\n");
-	snake_play(&driver);
-	printf("err\n");
+	while(1) {
+		snake_driver_t driver;
+		driver.delay_function_cb = delay;
+		driver.display_frame_cb = display_flush;
+		driver.display_score_cb = display_score;
+		driver.random_number_cb = rnd;
+		driver.read_direction_cb = read_direction;
+		driver.resolution = 512;
+		driver.snake_length = 32;
+		driver.frame_buffer = FRAME_BUFFER_BASE;
+		printf("start snake\n");
+		char* msg = snake_play(&driver);
+		printf(msg);
+	}
 }

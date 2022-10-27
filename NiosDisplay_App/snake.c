@@ -4,8 +4,8 @@
 
 #include "snake.h"
 
-void clear_buffer(const snake_driver_t* driver) {
-	memset(driver->frame_buffer, 0x00, driver->resolution*driver->resolution);
+void fill_buffer(const snake_driver_t* driver, u8 color) {
+	memset(driver->frame_buffer, color, driver->resolution*driver->resolution);
 }
 
 void draw_square(const snake_driver_t* driver, point_t location, u8 color) {
@@ -90,7 +90,7 @@ direction_t filter_direction(direction_t current_direction, direction_t directio
     return current_direction;
 }
 
-void snake_play(const snake_driver_t* driver) {
+char* snake_play(const snake_driver_t* driver) {
     
     snake_t snake = {
         .current_direction = right,
@@ -105,7 +105,7 @@ void snake_play(const snake_driver_t* driver) {
         driver->random_number_cb()
     };
 
-    clear_buffer(driver);
+    fill_buffer(driver, 0x00);
     draw_square(driver, current_food, 0x5A);
 
     while(1) {
@@ -118,13 +118,18 @@ void snake_play(const snake_driver_t* driver) {
 
 		//Detect collision with snake
 		if(detect_collision_snake(&snake)) {
-			driver->delay_function_cb(10000);
+			fill_buffer(driver, 0x00);
+			driver->delay_function_cb(5000);
+			return "Game over, you lost!\n";
 		}
 
     	 //Detect collision food
 		if(point_t_equals(snake.current_location, current_food)) {
 			snake.length += 1;
 			draw_square(driver, snake.point_history[0], 0xFF);
+			if(snake.length == driver->snake_length) {
+				return "Game over, you won!\n";
+			}
 			current_food.x = driver->random_number_cb();
 			current_food.y = driver->random_number_cb();
 			bool valid = false;

@@ -55,6 +55,7 @@ static void interrupt(void* c) {
 
 int main(void) {
 
+	//Register interrupts
 	IOWR_ALTERA_AVALON_PIO_IRQ_MASK(BTN_PIO_BASE, 0xf);
 	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(BTN_PIO_BASE, 0x0);
 	void* edge_capture_ptr = (void*) &edge_capture;
@@ -70,8 +71,11 @@ int main(void) {
 		driver.read_direction_cb = read_direction;
 		driver.resolution = 512;
 		driver.snake_length = 32;
+		driver.snake_color = 0xFF; //White
+		driver.background_color = 0x00; //Black
+		driver.food_color = 0x5A; //Gray
 		driver.frame_buffer = (u8*)FRAME_BUFFER_BASE;
-		printf("start snake\n");
+		printf("Starting snake...\n");
 		char* msg = snake_play(&driver);
 		printf(msg);
 	}

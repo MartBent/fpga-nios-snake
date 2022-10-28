@@ -4,7 +4,6 @@
 
 #include "snake.h"
 
-
 void draw_game_over(const snake_driver_t* driver) {
 	const u8 game_over_points_x[96] = {
 			2,2,2,2,2,2,2,2,2,2,2,
@@ -32,13 +31,13 @@ void draw_game_over(const snake_driver_t* driver) {
 			4,7,12,14,19,27,29,
 			5,6,13,19,20,21,22,27,30
 	};
-	fill_buffer(driver, 0x00);
+	fill_buffer(driver, driver->background_color);
 	for(int i = 0; i < 96; i++) {
 		point_t point = {
 				.x = game_over_points_x[i],
 				.y = game_over_points_y[i]
 		};
-		draw_square(driver,point, 0xFF);
+		draw_square(driver,point, driver->snake_color); 
 	}
 }
 void fill_buffer(const snake_driver_t* driver, u8 color) {
@@ -126,7 +125,14 @@ direction_t filter_direction(direction_t current_direction, direction_t directio
 }
 
 char* snake_play(const snake_driver_t* driver) {
-    
+
+	if(driver->frame_buffer == NULL) {
+		return "Frame buffer is NULL, possibly a memory issue?";
+	}
+	if(driver->display_frame_cb == NULL || driver->delay_function_cb == NULL || driver->display_score_cb == NULL || driver->random_number_cb == NULL || driver->read_direction_cb == NULL) {
+		return "Not all callbacks are defined!";
+	}
+
     snake_t snake = {
         .current_direction = right,
         .current_location = {16,16},
@@ -140,8 +146,8 @@ char* snake_play(const snake_driver_t* driver) {
         driver->random_number_cb()
     };
 
-    fill_buffer(driver, 0x00);
-    draw_square(driver, current_food, 0x5A);
+    fill_buffer(driver, driver->background_color);
+    draw_square(driver, current_food, driver->food_color);
 
     while(1) {
 
@@ -161,7 +167,7 @@ char* snake_play(const snake_driver_t* driver) {
     	 //Detect collision food
 		if(point_t_equals(snake.current_location, current_food)) {
 			snake.length += 1;
-			draw_square(driver, snake.point_history[0], 0xFF);
+			draw_square(driver, snake.point_history[0], driver->snake_color);
 			if(snake.length == driver->snake_length) {
 
 				draw_game_over(driver);
@@ -182,11 +188,11 @@ char* snake_play(const snake_driver_t* driver) {
 				}
 				valid = true;
 			}
-			draw_square(driver, current_food, 0x5A);
+			draw_square(driver, current_food, driver->food_color);
 		}
 
-		draw_square(driver, snake.point_history[snake.length], 0x00);
-		draw_square(driver, snake.point_history[0], 0xFF);
+		draw_square(driver, snake.point_history[snake.length], driver->background_color);
+		draw_square(driver, snake.point_history[0], driver->snake_color);
 
         driver->display_frame_cb((const u8*)driver->frame_buffer, driver->resolution);
         driver->display_score_cb(snake.length);

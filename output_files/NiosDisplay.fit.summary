@@ -1,12 +1,12 @@
-Fitter Status : Successful - Fri Oct 28 11:31:44 2022
+Fitter Status : Successful - Fri Oct 28 11:42:52 2022
 Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 Revision Name : NiosDisplay
 Top-level Entity Name : niosdisplay
 Family : Cyclone V
 Device : 5CSEMA5F31C6
 Timing Models : Final
-Logic utilization (in ALMs) : 1,373 / 32,070 ( 4 % )
-Total registers : 1914
+Logic utilization (in ALMs) : 1,375 / 32,070 ( 4 % )
+Total registers : 1900
 Total pins : 49 / 457 ( 11 % )
 Total virtual pins : 0
 Total block memory bits : 2,796,032 / 4,065,280 ( 69 % )

@@ -21,6 +21,9 @@ typedef struct {
     uint32_t resolution;
     u8* frame_buffer;
     u8 snake_length;
+    u8 background_color;
+    u8 food_color;
+    u8 snake_color;
     delayFunction delay_function_cb;
     displayFrameFunction display_frame_cb;
     displayScoreFunction display_score_cb;

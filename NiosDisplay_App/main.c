@@ -23,7 +23,7 @@ u8 rnd() {
 }
 
 void display_score(u8 score) {
-
+	IOWR_ALTERA_AVALON_PIO_DATA(SCORE_PIO_BASE, score);
 }
 
 direction_t read_direction() {
@@ -69,8 +69,8 @@ int main(void) {
 		driver.random_number_cb = rnd;
 		driver.read_direction_cb = read_direction;
 		driver.resolution = 512;
-		driver.snake_length = 2;
-		driver.frame_buffer = FRAME_BUFFER_BASE ;
+		driver.snake_length = 32;
+		driver.frame_buffer = (u8*)FRAME_BUFFER_BASE;
 		printf("start snake\n");
 		char* msg = snake_play(&driver);
 		printf(msg);

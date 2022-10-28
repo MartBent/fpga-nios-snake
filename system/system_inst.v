@@ -8,6 +8,7 @@
 		.frame_buf_readdata   (<connected-to-frame_buf_readdata>),   //          .readdata
 		.frame_buf_writedata  (<connected-to-frame_buf_writedata>),  //          .writedata
 		.frame_buf_byteenable (<connected-to-frame_buf_byteenable>), //          .byteenable
-		.reset_reset_n        (<connected-to-reset_reset_n>)         //     reset.reset_n
+		.reset_reset_n        (<connected-to-reset_reset_n>),        //     reset.reset_n
+		.score_pio_export     (<connected-to-score_pio_export>)      // score_pio.export
 	);
 

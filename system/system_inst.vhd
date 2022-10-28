@@ -9,7 +9,8 @@
 			frame_buf_readdata   : out std_logic_vector(31 downto 0);                    -- readdata
 			frame_buf_writedata  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
 			frame_buf_byteenable : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- byteenable
-			reset_reset_n        : in  std_logic                     := 'X'              -- reset_n
+			reset_reset_n        : in  std_logic                     := 'X';             -- reset_n
+			score_pio_export     : out std_logic_vector(5 downto 0)                      -- export
 		);
 	end component system;
 
@@ -24,6 +25,7 @@
 			frame_buf_readdata   => CONNECTED_TO_frame_buf_readdata,   --          .readdata
 			frame_buf_writedata  => CONNECTED_TO_frame_buf_writedata,  --          .writedata
 			frame_buf_byteenable => CONNECTED_TO_frame_buf_byteenable, --          .byteenable
-			reset_reset_n        => CONNECTED_TO_reset_reset_n         --     reset.reset_n
+			reset_reset_n        => CONNECTED_TO_reset_reset_n,        --     reset.reset_n
+			score_pio_export     => CONNECTED_TO_score_pio_export      -- score_pio.export
 		);
 

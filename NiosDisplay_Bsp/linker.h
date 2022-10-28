@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'system'
  * SOPC Builder design path: ../system.sopcinfo
  *
- * Generated: Thu Oct 27 15:50:17 CEST 2022
+ * Generated: Fri Oct 28 10:37:00 CEST 2022
  */
 
 /*
@@ -65,11 +65,11 @@
  *
  */
 
-#define FRAME_BUFFER_REGION_BASE 0x0
+#define FRAME_BUFFER_REGION_BASE 0x80000
 #define FRAME_BUFFER_REGION_SPAN 282144
-#define MEMORY_REGION_BASE 0x90020
+#define MEMORY_REGION_BASE 0x110020
 #define MEMORY_REGION_SPAN 65504
-#define RESET_REGION_BASE 0x90000
+#define RESET_REGION_BASE 0x110000
 #define RESET_REGION_SPAN 32
 
 

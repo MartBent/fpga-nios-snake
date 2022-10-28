@@ -10,19 +10,20 @@ void draw_game_over(const snake_driver_t* driver) {
 			2,2,2,2,2,2,2,2,2,2,2,
 			3,3,3,3,3,3,3,3,
 			4,4,4,4,4,4,4,4,4,4,4,4,4,4,
-			5,5,5,5,5,
+			5,5,5,5,5,5,5,
 			6,6,6,6,6,6,6,6,6,6,6,6,
-			10,10,10,10,10,10,10,10,10,
+
+			10,10,10,10,10,10,10,10,10,10,10,
 			11,11,11,11,11,11,11,
 			12,12,12,12,12,12,12,12,12,12,
 			13,13,13,13,13,13,13,
-			14,14,14,14,14,14,14
+			14,14,14,14,14,14,14,14,14
 	};
 	const u8 game_over_points_y[96] = {
 			5,6,7,13,14,19,23,27,28,29,30,
 			4,12,15,19,20,22,23,27,
 			4,6,7,8,12,13,14,15,19,21,23,27,28,29,
-			4,8,9,15,19,23,27,
+			4,8,12,15,19,23,27,
 			5,6,7,8,12,15,19,23,27,28,29,30,
 
 			5,6,12,14,19,20,21,22,27,28,29,
@@ -32,7 +33,7 @@ void draw_game_over(const snake_driver_t* driver) {
 			5,6,13,19,20,21,22,27,30
 	};
 	fill_buffer(driver, 0x00);
-	for(int i = 0; i < 80; i++) {
+	for(int i = 0; i < 96; i++) {
 		point_t point = {
 				.x = game_over_points_x[i],
 				.y = game_over_points_y[i]
@@ -48,8 +49,6 @@ void draw_square(const snake_driver_t* driver, point_t location, u8 color) {
     //Location is valid
     const unsigned int square_size = driver->resolution / 32;
     const unsigned int square_diameter = square_size / 2;
-
-
 
 	u8* start = driver->frame_buffer + (driver->resolution*location.x*square_size - square_diameter) + (location.y*square_size);
 

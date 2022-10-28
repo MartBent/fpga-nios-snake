@@ -7,10 +7,11 @@ ENTITY niosdisplay IS
 		clk			:  IN  	STD_LOGIC;
 		key			:  IN 	STD_LOGIC;
 		pixel_clk   :  OUT   STD_LOGIC;
-		red			:	OUT	STD_LOGIC_VECTOR(7 DOWNTO 0) := (OTHERS => '1');  --red magnitude output to DAC
-		green			:	OUT	STD_LOGIC_VECTOR(7 DOWNTO 0) := (OTHERS => '1');  --green magnitude output to DAC
-		blue			:	OUT	STD_LOGIC_VECTOR(7 DOWNTO 0) := (OTHERS => '1'); --blue magnitude output to DAC
-		btn			:	IN	STD_LOGIC_VECTOR(3 DOWNTO 0) := (OTHERS => '0'); --btn pio
+		red			:	OUT	STD_LOGIC_VECTOR(7 DOWNTO 0) := (OTHERS => '1');  
+		green			:	OUT	STD_LOGIC_VECTOR(7 DOWNTO 0) := (OTHERS => '1');  
+		blue			:	OUT	STD_LOGIC_VECTOR(7 DOWNTO 0) := (OTHERS => '1'); 
+		btn			:	IN	STD_LOGIC_VECTOR(3 DOWNTO 0) := (OTHERS => '0');
+		seven_seg   : OUT STD_LOGIC_VECTOR(13 DOWNTO 0) := (OTHERS => '0');
 		h_sync    	: OUT  STD_LOGIC;
 		v_sync    	: OUT  STD_LOGIC;
 		n_blank     : OUT  STD_LOGIC;
@@ -52,9 +53,17 @@ COMPONENT system is
 		frame_buf_readdata   : out std_logic_vector(31 downto 0);                    --          .readdata
 		frame_buf_writedata  : in  std_logic_vector(31 downto 0) := (others => '0'); --          .writedata
 		frame_buf_byteenable : in  std_logic_vector(3 downto 0)  := (others => '0'); --          .byteenable
-		reset_reset_n        : in  std_logic                     := '0'              --     reset.reset_n
+		reset_reset_n        : in  std_logic                     := '0';              --     reset.reset_n
+		score_pio_export     : out std_logic_vector(5 downto 0) := "000000"
 	);
 END COMPONENT system;
+
+component seven_seg_encoder is
+  port(
+	 score : in std_logic_vector(5 downto 0);
+	 output : out std_logic_vector(13 downto 0)
+	 );
+end component seven_seg_encoder;
 
 --VGA Stuff
 signal clk_138 : std_logic;
@@ -68,21 +77,26 @@ signal frame_buf_addr : natural range 0 to 65536 := 0;
 signal frame_buf_cs : std_logic := '0';
 signal frame_buf_byte_enable : std_logic_vector(3 downto 0) := "0000";
 signal frame_buf_addr_vec : std_logic_vector(16 downto 0) := "00000000000000000";
-
+signal score_7seg : std_logic_vector(5 downto 0) := "000000";
+signal score_7seg_inv : std_logic_vector(13 downto 0) := "00000000000000";
 BEGIN
 	
 	u0: altpll0 port map('0', clk, clk_138);
 	u1: vga_controller port map(clk_138, '1', h_sync,v_sync, disp_ena, column, row, n_blank, n_sync);
 	u2: system port map(btn_pio_export => btn, 
 							  clk_clk => clk_138, 
-							  reset_reset_n => '1', 
+							  reset_reset_n => key, 
 							  frame_buf_clken => '1',
 							  frame_buf_address => frame_buf_addr_vec, 
 							  frame_buf_readdata => mem_data,
 							  frame_buf_chipselect => frame_buf_cs,
-							  frame_buf_byteenable => frame_buf_byte_enable
+							  frame_buf_byteenable => frame_buf_byte_enable,
+							  score_pio_export => score_7seg
 							  );
-	
+	u3: seven_seg_encoder port map(score => score_7seg,
+											 output => score_7seg_inv);
+											 
+	seven_seg <= not score_7seg_inv; --Inverse logic level
 	pixel_clk <= clk_138;
 	
 	draw_pixel : PROCESS(clk_138)

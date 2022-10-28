@@ -9,7 +9,8 @@ module system (
 	frame_buf_readdata,
 	frame_buf_writedata,
 	frame_buf_byteenable,
-	reset_reset_n);	
+	reset_reset_n,
+	score_pio_export);	
 
 	input	[3:0]	btn_pio_export;
 	input		clk_clk;
@@ -21,4 +22,5 @@ module system (
 	input	[31:0]	frame_buf_writedata;
 	input	[3:0]	frame_buf_byteenable;
 	input		reset_reset_n;
+	output	[5:0]	score_pio_export;
 endmodule

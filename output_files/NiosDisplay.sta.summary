@@ -3,35 +3,35 @@ Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Setup 'clk'
-Slack : 8.062
+Slack : 7.240
 TNS   : 0.000
 
 Type  : Setup 'altera_reserved_tck'
-Slack : 9.988
+Slack : 9.903
 TNS   : 0.000
 
 Type  : Hold 'altera_reserved_tck'
-Slack : 0.226
+Slack : 0.229
 TNS   : 0.000
 
 Type  : Hold 'clk'
-Slack : 0.299
-TNS   : 0.000
-
-Type  : Recovery 'clk'
-Slack : 13.982
+Slack : 0.302
 TNS   : 0.000
 
 Type  : Recovery 'altera_reserved_tck'
-Slack : 14.788
+Slack : 14.511
 TNS   : 0.000
 
-Type  : Removal 'clk'
-Slack : 0.577
+Type  : Recovery 'clk'
+Slack : 15.640
 TNS   : 0.000
 
 Type  : Removal 'altera_reserved_tck'
-Slack : 0.811
+Slack : 0.837
+TNS   : 0.000
+
+Type  : Removal 'clk'
+Slack : 0.909
 TNS   : 0.000
 
 Type  : Minimum Pulse Width 'clk'
@@ -39,7 +39,7 @@ Slack : 8.838
 TNS   : 0.000
 
 Type  : Minimum Pulse Width 'altera_reserved_tck'
-Slack : 15.612
+Slack : 15.631
 TNS   : 0.000
 
 ------------------------------------------------------------

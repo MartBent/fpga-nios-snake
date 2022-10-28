@@ -1,5 +1,5 @@
 Timing Analyzer report for NiosDisplay
-Thu Oct 27 17:44:09 2022
+Fri Oct 28 11:32:06 2022
 Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 
 
@@ -80,14 +80,14 @@ https://fpgasoftware.intel.com/eula.
 ; Number detected on machine ; 12          ;
 ; Maximum allowed            ; 6           ;
 ;                            ;             ;
-; Average used               ; 1.23        ;
+; Average used               ; 1.21        ;
 ; Maximum used               ; 6           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   8.4%      ;
-;     Processor 3            ;   7.5%      ;
-;     Processor 4            ;   6.8%      ;
+;     Processor 2            ;   7.6%      ;
+;     Processor 3            ;   6.6%      ;
+;     Processor 4            ;   6.3%      ;
 ;     Processor 5            ;   0.3%      ;
 ;     Processor 6            ;   0.2%      ;
 +----------------------------+-------------+
@@ -98,9 +98,9 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------+--------+--------------------------+
 ; SDC File Path                                           ; Status ; Read at                  ;
 +---------------------------------------------------------+--------+--------------------------+
-; system/synthesis/submodules/altera_reset_controller.sdc ; OK     ; Thu Oct 27 17:44:08 2022 ;
-; system/synthesis/submodules/system_cpu_cpu.sdc          ; OK     ; Thu Oct 27 17:44:08 2022 ;
-; NiosDisplay.sdc                                         ; OK     ; Thu Oct 27 17:44:08 2022 ;
+; system/synthesis/submodules/altera_reset_controller.sdc ; OK     ; Fri Oct 28 11:32:04 2022 ;
+; system/synthesis/submodules/system_cpu_cpu.sdc          ; OK     ; Fri Oct 28 11:32:04 2022 ;
+; NiosDisplay.sdc                                         ; OK     ; Fri Oct 28 11:32:04 2022 ;
 +---------------------------------------------------------+--------+--------------------------+
 
 
@@ -119,8 +119,8 @@ https://fpgasoftware.intel.com/eula.
 +-----------+-----------------+---------------------+------+
 ; Fmax      ; Restricted Fmax ; Clock Name          ; Note ;
 +-----------+-----------------+---------------------+------+
-; 65.1 MHz  ; 65.1 MHz        ; altera_reserved_tck ;      ;
-; 83.77 MHz ; 83.77 MHz       ; clk                 ;      ;
+; 62.92 MHz ; 62.92 MHz       ; altera_reserved_tck ;      ;
+; 78.37 MHz ; 78.37 MHz       ; clk                 ;      ;
 +-----------+-----------------+---------------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -136,8 +136,8 @@ HTML report is unavailable in plain text report export.
 +---------------------+-------+---------------+
 ; Clock               ; Slack ; End Point TNS ;
 +---------------------+-------+---------------+
-; clk                 ; 8.062 ; 0.000         ;
-; altera_reserved_tck ; 9.988 ; 0.000         ;
+; clk                 ; 7.240 ; 0.000         ;
+; altera_reserved_tck ; 9.903 ; 0.000         ;
 +---------------------+-------+---------------+
 
 
@@ -146,8 +146,8 @@ HTML report is unavailable in plain text report export.
 +---------------------+-------+---------------+
 ; Clock               ; Slack ; End Point TNS ;
 +---------------------+-------+---------------+
-; altera_reserved_tck ; 0.226 ; 0.000         ;
-; clk                 ; 0.299 ; 0.000         ;
+; altera_reserved_tck ; 0.229 ; 0.000         ;
+; clk                 ; 0.302 ; 0.000         ;
 +---------------------+-------+---------------+
 
 
@@ -156,8 +156,8 @@ HTML report is unavailable in plain text report export.
 +---------------------+--------+---------------+
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
-; clk                 ; 13.982 ; 0.000         ;
-; altera_reserved_tck ; 14.788 ; 0.000         ;
+; altera_reserved_tck ; 14.511 ; 0.000         ;
+; clk                 ; 15.640 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -166,8 +166,8 @@ HTML report is unavailable in plain text report export.
 +---------------------+-------+---------------+
 ; Clock               ; Slack ; End Point TNS ;
 +---------------------+-------+---------------+
-; clk                 ; 0.577 ; 0.000         ;
-; altera_reserved_tck ; 0.811 ; 0.000         ;
+; altera_reserved_tck ; 0.837 ; 0.000         ;
+; clk                 ; 0.909 ; 0.000         ;
 +---------------------+-------+---------------+
 
 
@@ -177,7 +177,7 @@ HTML report is unavailable in plain text report export.
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
 ; clk                 ; 8.838  ; 0.000         ;
-; altera_reserved_tck ; 15.612 ; 0.000         ;
+; altera_reserved_tck ; 15.631 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -187,10 +187,10 @@ HTML report is unavailable in plain text report export.
 Worst-Case MTBF of Design is 1e+09 years or 3.15e+16 seconds.
 Typical MTBF of Design is 1e+09 years or 3.15e+16 seconds.
 
-Number of Synchronizer Chains Found: 27
+Number of Synchronizer Chains Found: 28
 Shortest Synchronizer Chain: 2 Registers
-Fraction of Chains for which MTBFs Could Not be Calculated: 0.778
-Worst Case Available Settling Time: 18.953 ns
+Fraction of Chains for which MTBFs Could Not be Calculated: 0.786
+Worst Case Available Settling Time: 18.205 ns
 
 Worst-Case MTBF values are calculated based on the worst-case silicon characteristics, with worst-case operating conditions.
   - Under worst-case conditions, an increase of 100ps in available settling time will increase MTBF values by a factor of 79.4
@@ -229,6 +229,20 @@ Typical MTBF values are calculated based on the nominal silicon characteristics,
 ; blue[5]             ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 ; blue[6]             ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 ; blue[7]             ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; seven_seg[0]        ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; seven_seg[1]        ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; seven_seg[2]        ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; seven_seg[3]        ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; seven_seg[4]        ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; seven_seg[5]        ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; seven_seg[6]        ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; seven_seg[7]        ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; seven_seg[8]        ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; seven_seg[9]        ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; seven_seg[10]       ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; seven_seg[11]       ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; seven_seg[12]       ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; seven_seg[13]       ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 ; h_sync              ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 ; v_sync              ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 ; n_blank             ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
@@ -242,12 +256,12 @@ Typical MTBF values are calculated based on the nominal silicon characteristics,
 +---------------------+--------------+-----------------+-----------------+
 ; Pin                 ; I/O Standard ; 10-90 Rise Time ; 90-10 Fall Time ;
 +---------------------+--------------+-----------------+-----------------+
-; key                 ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; clk                 ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; btn[2]              ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; btn[1]              ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; btn[0]              ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; btn[3]              ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; btn[1]              ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; btn[2]              ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; key                 ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; altera_reserved_tms ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; altera_reserved_tck ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; altera_reserved_tdi ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
@@ -284,6 +298,20 @@ Typical MTBF values are calculated based on the nominal silicon characteristics,
 ; blue[5]             ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.96e-05 V                   ; 2.38 V              ; -0.0306 V           ; 0.23 V                               ; 0.206 V                              ; 4.83e-10 s                  ; 5.01e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.96e-05 V                  ; 2.38 V             ; -0.0306 V          ; 0.23 V                              ; 0.206 V                             ; 4.83e-10 s                 ; 5.01e-10 s                 ; No                        ; Yes                       ;
 ; blue[6]             ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.49e-05 V                   ; 2.34 V              ; -0.0118 V           ; 0.182 V                              ; 0.051 V                              ; 4.81e-10 s                  ; 4.83e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 3.49e-05 V                  ; 2.34 V             ; -0.0118 V          ; 0.182 V                             ; 0.051 V                             ; 4.81e-10 s                 ; 4.83e-10 s                 ; Yes                       ; Yes                       ;
 ; blue[7]             ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.49e-05 V                   ; 2.34 V              ; -0.0118 V           ; 0.182 V                              ; 0.051 V                              ; 4.81e-10 s                  ; 4.83e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 3.49e-05 V                  ; 2.34 V             ; -0.0118 V          ; 0.182 V                             ; 0.051 V                             ; 4.81e-10 s                 ; 4.83e-10 s                 ; Yes                       ; Yes                       ;
+; seven_seg[0]        ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.96e-05 V                   ; 2.38 V              ; -0.0306 V           ; 0.23 V                               ; 0.206 V                              ; 4.83e-10 s                  ; 5.01e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.96e-05 V                  ; 2.38 V             ; -0.0306 V          ; 0.23 V                              ; 0.206 V                             ; 4.83e-10 s                 ; 5.01e-10 s                 ; No                        ; Yes                       ;
+; seven_seg[1]        ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.96e-05 V                   ; 2.38 V              ; -0.0306 V           ; 0.23 V                               ; 0.206 V                              ; 4.83e-10 s                  ; 5.01e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.96e-05 V                  ; 2.38 V             ; -0.0306 V          ; 0.23 V                              ; 0.206 V                             ; 4.83e-10 s                 ; 5.01e-10 s                 ; No                        ; Yes                       ;
+; seven_seg[2]        ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.49e-05 V                   ; 2.34 V              ; -0.0118 V           ; 0.182 V                              ; 0.051 V                              ; 4.81e-10 s                  ; 4.83e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 3.49e-05 V                  ; 2.34 V             ; -0.0118 V          ; 0.182 V                             ; 0.051 V                             ; 4.81e-10 s                 ; 4.83e-10 s                 ; Yes                       ; Yes                       ;
+; seven_seg[3]        ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.49e-05 V                   ; 2.34 V              ; -0.0118 V           ; 0.182 V                              ; 0.051 V                              ; 4.81e-10 s                  ; 4.83e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 3.49e-05 V                  ; 2.34 V             ; -0.0118 V          ; 0.182 V                             ; 0.051 V                             ; 4.81e-10 s                 ; 4.83e-10 s                 ; Yes                       ; Yes                       ;
+; seven_seg[4]        ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.49e-05 V                   ; 2.34 V              ; -0.0118 V           ; 0.182 V                              ; 0.051 V                              ; 4.81e-10 s                  ; 4.83e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 3.49e-05 V                  ; 2.34 V             ; -0.0118 V          ; 0.182 V                             ; 0.051 V                             ; 4.81e-10 s                 ; 4.83e-10 s                 ; Yes                       ; Yes                       ;
+; seven_seg[5]        ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.96e-05 V                   ; 2.38 V              ; -0.0306 V           ; 0.23 V                               ; 0.206 V                              ; 4.83e-10 s                  ; 5.01e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.96e-05 V                  ; 2.38 V             ; -0.0306 V          ; 0.23 V                              ; 0.206 V                             ; 4.83e-10 s                 ; 5.01e-10 s                 ; No                        ; Yes                       ;
+; seven_seg[6]        ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.96e-05 V                   ; 2.38 V              ; -0.0306 V           ; 0.23 V                               ; 0.206 V                              ; 4.83e-10 s                  ; 5.01e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.96e-05 V                  ; 2.38 V             ; -0.0306 V          ; 0.23 V                              ; 0.206 V                             ; 4.83e-10 s                 ; 5.01e-10 s                 ; No                        ; Yes                       ;
+; seven_seg[7]        ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.88e-05 V                   ; 2.39 V              ; -0.0374 V           ; 0.189 V                              ; 0.158 V                              ; 4.66e-10 s                  ; 4.67e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.88e-05 V                  ; 2.39 V             ; -0.0374 V          ; 0.189 V                             ; 0.158 V                             ; 4.66e-10 s                 ; 4.67e-10 s                 ; No                        ; Yes                       ;
+; seven_seg[8]        ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.96e-05 V                   ; 2.38 V              ; -0.0306 V           ; 0.23 V                               ; 0.206 V                              ; 4.83e-10 s                  ; 5.01e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.96e-05 V                  ; 2.38 V             ; -0.0306 V          ; 0.23 V                              ; 0.206 V                             ; 4.83e-10 s                 ; 5.01e-10 s                 ; No                        ; Yes                       ;
+; seven_seg[9]        ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.88e-05 V                   ; 2.39 V              ; -0.037 V            ; 0.188 V                              ; 0.158 V                              ; 4.67e-10 s                  ; 4.67e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.88e-05 V                  ; 2.39 V             ; -0.037 V           ; 0.188 V                             ; 0.158 V                             ; 4.67e-10 s                 ; 4.67e-10 s                 ; No                        ; Yes                       ;
+; seven_seg[10]       ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.49e-05 V                   ; 2.34 V              ; -0.0118 V           ; 0.182 V                              ; 0.051 V                              ; 4.81e-10 s                  ; 4.83e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 3.49e-05 V                  ; 2.34 V             ; -0.0118 V          ; 0.182 V                             ; 0.051 V                             ; 4.81e-10 s                 ; 4.83e-10 s                 ; Yes                       ; Yes                       ;
+; seven_seg[11]       ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.49e-05 V                   ; 2.34 V              ; -0.0118 V           ; 0.182 V                              ; 0.051 V                              ; 4.81e-10 s                  ; 4.83e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 3.49e-05 V                  ; 2.34 V             ; -0.0118 V          ; 0.182 V                             ; 0.051 V                             ; 4.81e-10 s                 ; 4.83e-10 s                 ; Yes                       ; Yes                       ;
+; seven_seg[12]       ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.88e-05 V                   ; 2.39 V              ; -0.037 V            ; 0.188 V                              ; 0.158 V                              ; 4.67e-10 s                  ; 4.67e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.88e-05 V                  ; 2.39 V             ; -0.037 V           ; 0.188 V                             ; 0.158 V                             ; 4.67e-10 s                 ; 4.67e-10 s                 ; No                        ; Yes                       ;
+; seven_seg[13]       ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.49e-05 V                   ; 2.34 V              ; -0.0118 V           ; 0.182 V                              ; 0.051 V                              ; 4.81e-10 s                  ; 4.83e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 3.49e-05 V                  ; 2.34 V             ; -0.0118 V          ; 0.182 V                             ; 0.051 V                             ; 4.81e-10 s                 ; 4.83e-10 s                 ; Yes                       ; Yes                       ;
 ; h_sync              ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.88e-05 V                   ; 2.39 V              ; -0.037 V            ; 0.188 V                              ; 0.158 V                              ; 4.67e-10 s                  ; 4.67e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.88e-05 V                  ; 2.39 V             ; -0.037 V           ; 0.188 V                             ; 0.158 V                             ; 4.67e-10 s                 ; 4.67e-10 s                 ; No                        ; Yes                       ;
 ; v_sync              ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.96e-05 V                   ; 2.38 V              ; -0.0306 V           ; 0.23 V                               ; 0.206 V                              ; 4.83e-10 s                  ; 5.01e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.96e-05 V                  ; 2.38 V             ; -0.0306 V          ; 0.23 V                              ; 0.206 V                             ; 4.83e-10 s                 ; 5.01e-10 s                 ; No                        ; Yes                       ;
 ; n_blank             ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.49e-05 V                   ; 2.34 V              ; -0.0118 V           ; 0.182 V                              ; 0.051 V                              ; 4.81e-10 s                  ; 4.83e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 3.49e-05 V                  ; 2.34 V             ; -0.0118 V          ; 0.182 V                             ; 0.051 V                             ; 4.81e-10 s                 ; 4.83e-10 s                 ; Yes                       ; Yes                       ;
@@ -297,10 +325,10 @@ Typical MTBF values are calculated based on the nominal silicon characteristics,
 +---------------------+---------------------+------------+------------+----------+----------+
 ; From Clock          ; To Clock            ; RR Paths   ; FR Paths   ; RF Paths ; FF Paths ;
 +---------------------+---------------------+------------+------------+----------+----------+
-; altera_reserved_tck ; altera_reserved_tck ; 8454       ; 0          ; 68       ; 3        ;
+; altera_reserved_tck ; altera_reserved_tck ; 6520       ; 0          ; 64       ; 2        ;
 ; clk                 ; altera_reserved_tck ; false path ; 0          ; 0        ; 0        ;
 ; altera_reserved_tck ; clk                 ; false path ; false path ; 0        ; 0        ;
-; clk                 ; clk                 ; 104319     ; 0          ; 0        ; 0        ;
+; clk                 ; clk                 ; 108436     ; 0          ; 0        ; 0        ;
 +---------------------+---------------------+------------+------------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -310,10 +338,10 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +---------------------+---------------------+------------+------------+----------+----------+
 ; From Clock          ; To Clock            ; RR Paths   ; FR Paths   ; RF Paths ; FF Paths ;
 +---------------------+---------------------+------------+------------+----------+----------+
-; altera_reserved_tck ; altera_reserved_tck ; 8454       ; 0          ; 68       ; 3        ;
+; altera_reserved_tck ; altera_reserved_tck ; 6520       ; 0          ; 64       ; 2        ;
 ; clk                 ; altera_reserved_tck ; false path ; 0          ; 0        ; 0        ;
 ; altera_reserved_tck ; clk                 ; false path ; false path ; 0        ; 0        ;
-; clk                 ; clk                 ; 104319     ; 0          ; 0        ; 0        ;
+; clk                 ; clk                 ; 108436     ; 0          ; 0        ; 0        ;
 +---------------------+---------------------+------------+------------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -323,9 +351,9 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +---------------------+---------------------+------------+----------+----------+----------+
 ; From Clock          ; To Clock            ; RR Paths   ; FR Paths ; RF Paths ; FF Paths ;
 +---------------------+---------------------+------------+----------+----------+----------+
-; altera_reserved_tck ; altera_reserved_tck ; 510        ; 0        ; 3        ; 0        ;
+; altera_reserved_tck ; altera_reserved_tck ; 257        ; 0        ; 2        ; 0        ;
 ; altera_reserved_tck ; clk                 ; false path ; 0        ; 0        ; 0        ;
-; clk                 ; clk                 ; 742        ; 0        ; 0        ; 0        ;
+; clk                 ; clk                 ; 752        ; 0        ; 0        ; 0        ;
 +---------------------+---------------------+------------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -335,9 +363,9 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +---------------------+---------------------+------------+----------+----------+----------+
 ; From Clock          ; To Clock            ; RR Paths   ; FR Paths ; RF Paths ; FF Paths ;
 +---------------------+---------------------+------------+----------+----------+----------+
-; altera_reserved_tck ; altera_reserved_tck ; 510        ; 0        ; 3        ; 0        ;
+; altera_reserved_tck ; altera_reserved_tck ; 257        ; 0        ; 2        ; 0        ;
 ; altera_reserved_tck ; clk                 ; false path ; 0        ; 0        ; 0        ;
-; clk                 ; clk                 ; 742        ; 0        ; 0        ; 0        ;
+; clk                 ; clk                 ; 752        ; 0        ; 0        ; 0        ;
 +---------------------+---------------------+------------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -363,8 +391,8 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; Unconstrained Clocks            ; 0     ; 0    ;
 ; Unconstrained Input Ports       ; 7     ; 7    ;
 ; Unconstrained Input Port Paths  ; 93    ; 93   ;
-; Unconstrained Output Ports      ; 28    ; 28   ;
-; Unconstrained Output Port Paths ; 32    ; 32   ;
+; Unconstrained Output Ports      ; 41    ; 41   ;
+; Unconstrained Output Port Paths ; 102   ; 102  ;
 +---------------------------------+-------+------+
 
 
@@ -425,6 +453,19 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; red[5]              ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; red[6]              ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; red[7]              ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[0]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[1]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[2]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[3]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[4]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[5]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[6]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[7]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[8]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[9]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[10]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[11]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[13]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; v_sync              ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 +---------------------+---------------------------------------------------------------------------------------+
 
@@ -476,6 +517,19 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; red[5]              ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; red[6]              ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; red[7]              ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[0]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[1]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[2]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[3]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[4]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[5]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[6]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[7]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[8]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[9]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[10]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[11]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_seg[13]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; v_sync              ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 +---------------------+---------------------------------------------------------------------------------------+
 
@@ -486,7 +540,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
-    Info: Processing started: Thu Oct 27 17:44:06 2022
+    Info: Processing started: Fri Oct 28 11:32:02 2022
 Info: Command: quartus_sta NiosDisplay -c NiosDisplay
 Info: qsta_default_script.tcl version: #1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -535,44 +589,44 @@ Info (332097): The following timing edges are non-unate.  The Timing Analyzer wi
     Info (332098): Cell: u0|altpll_component|auto_generated|generic_pll1~FRACTIONAL_PLL  from: refclkin  to: fbclk
     Info (332098): Cell: u0|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER  from: vco0ph[0]  to: divclk
     Info (332098): Cell: u0|altpll_component|auto_generated|generic_pll1~PLL_REFCLK_SELECT  from: clkin[2]  to: clkout
-    Info (332098): From: u2|cpu|cpu|the_system_cpu_cpu_nios2_oci|the_system_cpu_cpu_nios2_ocimem|system_cpu_cpu_ociram_sp_ram|the_altsyncram|auto_generated|ram_block1a16|clk0  to: system:u2|system_cpu:cpu|system_cpu_cpu:cpu|system_cpu_cpu_nios2_oci:the_system_cpu_cpu_nios2_oci|system_cpu_cpu_nios2_ocimem:the_system_cpu_cpu_nios2_ocimem|system_cpu_cpu_ociram_sp_ram_module:system_cpu_cpu_ociram_sp_ram|altsyncram:the_altsyncram|altsyncram_qid1:auto_generated|ram_block1a16~CLOCK1_ENABLE1_0
+    Info (332098): From: u2|cpu|cpu|the_system_cpu_cpu_nios2_oci|the_system_cpu_cpu_nios2_ocimem|system_cpu_cpu_ociram_sp_ram|the_altsyncram|auto_generated|ram_block1a8|clk0  to: system:u2|system_cpu:cpu|system_cpu_cpu:cpu|system_cpu_cpu_nios2_oci:the_system_cpu_cpu_nios2_oci|system_cpu_cpu_nios2_ocimem:the_system_cpu_cpu_nios2_ocimem|system_cpu_cpu_ociram_sp_ram_module:system_cpu_cpu_ociram_sp_ram|altsyncram:the_altsyncram|altsyncram_qid1:auto_generated|ram_block1a8~CLOCK1_ENABLE1_0
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Warning (332056): PLL cross checking found inconsistent PLL clock settings:
     Warning (332056): Node: u0|altpll_component|auto_generated|generic_pll1~FRACTIONAL_PLL|vcoph[0] was found missing 1 generated clock that corresponds to a base clock with a period of: 20.000
 Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
-Info (332146): Worst-case setup slack is 8.062
+Info (332146): Worst-case setup slack is 7.240
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     8.062               0.000 clk 
-    Info (332119):     9.988               0.000 altera_reserved_tck 
-Info (332146): Worst-case hold slack is 0.226
+    Info (332119):     7.240               0.000 clk 
+    Info (332119):     9.903               0.000 altera_reserved_tck 
+Info (332146): Worst-case hold slack is 0.229
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.226               0.000 altera_reserved_tck 
-    Info (332119):     0.299               0.000 clk 
-Info (332146): Worst-case recovery slack is 13.982
+    Info (332119):     0.229               0.000 altera_reserved_tck 
+    Info (332119):     0.302               0.000 clk 
+Info (332146): Worst-case recovery slack is 14.511
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    13.982               0.000 clk 
-    Info (332119):    14.788               0.000 altera_reserved_tck 
-Info (332146): Worst-case removal slack is 0.577
+    Info (332119):    14.511               0.000 altera_reserved_tck 
+    Info (332119):    15.640               0.000 clk 
+Info (332146): Worst-case removal slack is 0.837
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.577               0.000 clk 
-    Info (332119):     0.811               0.000 altera_reserved_tck 
+    Info (332119):     0.837               0.000 altera_reserved_tck 
+    Info (332119):     0.909               0.000 clk 
 Info (332146): Worst-case minimum pulse width slack is 8.838
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):     8.838               0.000 clk 
-    Info (332119):    15.612               0.000 altera_reserved_tck 
-Info (332114): Report Metastability: Found 27 synchronizer chains.
+    Info (332119):    15.631               0.000 altera_reserved_tck 
+Info (332114): Report Metastability: Found 28 synchronizer chains.
     Info (332114): Worst-Case MTBF of Design is 1e+09 years or 3.15e+16 seconds.
     Info (332114): Typical MTBF of Design is 1e+09 years or 3.15e+16 seconds.
 
-    Info (332114): Number of Synchronizer Chains Found: 27
+    Info (332114): Number of Synchronizer Chains Found: 28
     Info (332114): Shortest Synchronizer Chain: 2 Registers
-    Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 0.778
-    Info (332114): Worst Case Available Settling Time: 18.953 ns
+    Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 0.786
+    Info (332114): Worst Case Available Settling Time: 18.205 ns
     Info (332114): 
     Info (332114): Worst-Case MTBF values are calculated based on the worst-case silicon characteristics, with worst-case operating conditions.
     Info (332114):   - Under worst-case conditions, an increase of 100ps in available settling time will increase MTBF values by a factor of 79.4
@@ -581,9 +635,9 @@ Info (332114): Report Metastability: Found 27 synchronizer chains.
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 3 warnings
-    Info: Peak virtual memory: 818 megabytes
-    Info: Processing ended: Thu Oct 27 17:44:09 2022
-    Info: Elapsed time: 00:00:03
+    Info: Peak virtual memory: 814 megabytes
+    Info: Processing ended: Fri Oct 28 11:32:06 2022
+    Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:04
 
 

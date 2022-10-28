@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Oct 27, 2022 3:50:16 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1666878616863</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Oct 28, 2022 10:37:00 AM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1666946220559</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>/home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/fpga-nios-snake/NiosDisplay_Bsp</BspGeneratedLocation>
         <BspSettingsFile>/home/martb/Desktop/SchoolSaxion/Jaar4/EmbeddedSystems/fpga-nios-snake/NiosDisplay_Bsp/settings.bsp</BspSettingsFile>
         <SopcDesignFile>../system.sopcinfo</SopcDesignFile>
@@ -900,31 +900,37 @@
         </Setting>
         <MemoryMap>
                 <slaveDescriptor>frame_buffer</slaveDescriptor>
-                <addressRange>0x00000000 - 0x00044E1F</addressRange>
+                <addressRange>0x00080000 - 0x000C4E1F</addressRange>
                 <addressSpan>282144</addressSpan>
                 <attributes>memory</attributes>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>memory</slaveDescriptor>
-                <addressRange>0x00090000 - 0x0009FFFF</addressRange>
+                <addressRange>0x00110000 - 0x0011FFFF</addressRange>
                 <addressSpan>65536</addressSpan>
                 <attributes>memory</attributes>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>sys_clk_timer</slaveDescriptor>
-                <addressRange>0x000A1000 - 0x000A101F</addressRange>
+                <addressRange>0x00121000 - 0x0012101F</addressRange>
                 <addressSpan>32</addressSpan>
                 <attributes>timer</attributes>
         </MemoryMap>
         <MemoryMap>
+                <slaveDescriptor>score_pio</slaveDescriptor>
+                <addressRange>0x00121020 - 0x0012102F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>btn_pio</slaveDescriptor>
-                <addressRange>0x000A1020 - 0x000A102F</addressRange>
+                <addressRange>0x00121030 - 0x0012103F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>jtag</slaveDescriptor>
-                <addressRange>0x000A1030 - 0x000A1037</addressRange>
+                <addressRange>0x00121040 - 0x00121047</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
         </MemoryMap>

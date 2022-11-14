@@ -19,7 +19,7 @@ void display_flush(const u8* grid, const unsigned long resolution) {
 	//Not needed since the frame buffer pointer is passed
 }
 u8 rnd() {
-    return rand() % 31;
+    return (rand() % 30) + 1;
 }
 
 void display_score(u8 score) {
@@ -61,7 +61,10 @@ int main(void) {
 	void* edge_capture_ptr = (void*) &edge_capture;
 	alt_ic_isr_register(BTN_PIO_IRQ_INTERRUPT_CONTROLLER_ID, BTN_PIO_IRQ, interrupt, edge_capture_ptr, NULL);
 
+	//Generate random number
 	srand(1235);
+
+	//Play snake
 	while(1) {
 		snake_driver_t driver;
 		driver.delay_function_cb = delay;

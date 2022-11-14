@@ -85,7 +85,7 @@ BEGIN
 	u1: vga_controller port map(clk_138, '1', h_sync,v_sync, disp_ena, column, row, n_blank, n_sync);
 	u2: system port map(btn_pio_export => btn, 
 							  clk_clk => clk_138, 
-							  reset_reset_n => key, 
+							  reset_reset_n => '1', 
 							  frame_buf_clken => '1',
 							  frame_buf_address => frame_buf_addr_vec, 
 							  frame_buf_readdata => mem_data,
@@ -116,7 +116,7 @@ BEGIN
 			count := 0;
 		end if;
 		
-		IF disp_ena = '1' then
+		IF disp_ena = '1' then --Display time
 			IF((row > 255) and (row < 255+513) and (column > 319) and (column < 319+513)) THEN --Inside game screen
 				case count is
 					when 0 =>

@@ -174,10 +174,6 @@
 				{
 					"name" : "btn[0]",
 					"strict" : false
-				},
-				{
-					"name" : "key",
-					"strict" : false
 				}
 			]
 		}

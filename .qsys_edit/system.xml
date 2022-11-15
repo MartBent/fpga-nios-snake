@@ -707,6 +707,22 @@
 										<placeholders>
 											<version>0</version>
 											<format>dock.PlaceholderList</format>
+											<entry>
+												<key shared="false">
+													<placeholder>dock.single.IP\ Catalog</placeholder>
+												</key>
+												<item key="item" type="b">true</item>
+												<item key="item-keys" type="a">
+													<item type="s">x</item>
+													<item type="s">width</item>
+													<item type="s">y</item>
+													<item type="s">height</item>
+												</item>
+												<item key="item.x" type="i">970</item>
+												<item key="item.width" type="i">940</item>
+												<item key="item.y" type="i">123</item>
+												<item key="item.height" type="i">400</item>
+											</entry>
 										</placeholders>
 									</content>
 								</delegate>
@@ -758,6 +774,19 @@
 														</key>
 													</entry>
 												</item>
+												<item key="convert" type="b">true</item>
+												<item key="convert-keys" type="a">
+													<item type="s">size</item>
+													<item type="s">index</item>
+													<item type="s">id</item>
+													<item type="s">placeholder</item>
+													<item type="s">hold</item>
+												</item>
+												<item key="dock.size" type="i">400</item>
+												<item key="dock.index" type="i">0</item>
+												<item key="dock.id" type="i">0</item>
+												<item key="dock.placeholder" type="s">dock.single.IP\ Catalog</item>
+												<item key="dock.hold" type="b">false</item>
 											</entry>
 											<entry>
 												<key shared="false">
@@ -778,7 +807,18 @@
 									<type>dock.CContentArea.minimize</type>
 								</layout>
 							</adjacent>
-							<children ignore="false"/>
+							<children ignore="false">
+								<child>
+									<layout factory="predefined" placeholder="dock.single.IP\ Catalog">
+										<replacement id="dockablesingle IP Catalog"/>
+										<delegate id="delegate_ccontrol backup factory id">
+											<id>IP Catalog</id>
+											<area/>
+										</delegate>
+									</layout>
+									<children ignore="false"/>
+								</child>
+							</children>
 						</root>
 						<root name="ccontrol south">
 							<layout factory="predefined">
@@ -1100,7 +1140,7 @@
 								<delegate id="delegate_CommonDockStationFactory">
 									<root>true</root>
 									<content delegate="flap dock">
-										<window auto="true" direction="EAST"/>
+										<window auto="true" direction="WEST"/>
 										<placeholders>
 											<version>0</version>
 											<format>dock.PlaceholderList</format>
@@ -1485,26 +1525,6 @@
 									<replacement id="dockablesingle Instrumentation - Beta"/>
 									<delegate id="delegate_ccontrol backup factory id">
 										<id>Instrumentation - Beta</id>
-										<area/>
-									</delegate>
-								</layout>
-								<children ignore="false"/>
-							</layout>
-						</child>
-						<child key="single IP Catalog" root="ccontrol north" location="true">
-							<location>
-								<property factory="flap dock">
-									<index>0</index>
-									<holding>false</holding>
-									<size>400</size>
-									<placeholder>dock.single.IP\ Catalog</placeholder>
-								</property>
-							</location>
-							<layout>
-								<layout factory="predefined" placeholder="dock.single.IP\ Catalog">
-									<replacement id="dockablesingle IP Catalog"/>
-									<delegate id="delegate_ccontrol backup factory id">
-										<id>IP Catalog</id>
 										<area/>
 									</delegate>
 								</layout>
@@ -2025,18 +2045,26 @@
 								</property>
 							</properties>
 						</entry>
-						<entry id="single IP Catalog">
+						<entry id="single IP Catalog" current="dock.mode.minimized">
 							<history>
 								<mode>dock.mode.normal</mode>
+								<mode>dock.mode.externalized</mode>
 								<mode>dock.mode.maximized</mode>
 								<mode>dock.mode.minimized</mode>
 							</history>
 							<properties>
 								<property id="dock.mode.maximized">
 									<mode>dock.mode.maximized</mode>
-									<root>ccontrol center</root>
+									<root>external</root>
 									<location>
-										<property factory="SplitDockFullScreenPropertyFactory"/>
+										<property factory="screen dock">
+											<x>970</x>
+											<y>123</y>
+											<width>940</width>
+											<height>400</height>
+											<fullscreen>true</fullscreen>
+											<placeholder>dock.single.IP\ Catalog</placeholder>
+										</property>
 									</location>
 								</property>
 								<property id="dock.mode.minimized">
@@ -2047,6 +2075,20 @@
 											<index>0</index>
 											<holding>false</holding>
 											<size>400</size>
+											<placeholder>dock.single.IP\ Catalog</placeholder>
+										</property>
+									</location>
+								</property>
+								<property id="dock.mode.externalized">
+									<mode>dock.mode.externalized</mode>
+									<root>external</root>
+									<location>
+										<property factory="screen dock">
+											<x>970</x>
+											<y>123</y>
+											<width>940</width>
+											<height>400</height>
+											<fullscreen>false</fullscreen>
 											<placeholder>dock.single.IP\ Catalog</placeholder>
 										</property>
 									</location>

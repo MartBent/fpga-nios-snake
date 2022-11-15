@@ -11,13 +11,13 @@ preplace inst system.cpu -pg 1 -lvl 2 -y 200
 preplace inst system.memory -pg 1 -lvl 3 -y 330
 preplace inst system -pg 1 -lvl 1 -y 40 -regy -20
 preplace inst system.cpu.clock_bridge -pg 1
-preplace netloc INTERCONNECT<net_container>system</net_container>(SLAVE)frame_buffer.s1,(SLAVE)btn_pio.s1,(SLAVE)cpu.debug_mem_slave,(SLAVE)memory.s1,(MASTER)cpu.data_master,(SLAVE)jtag.avalon_jtag_slave,(MASTER)cpu.instruction_master,(SLAVE)sys_clk_timer.s1) 1 1 2 320 700 700
-preplace netloc EXPORT<net_container>system</net_container>(SLAVE)system.frame_buf,(SLAVE)frame_buffer.s2) 1 0 3 NJ 100 NJ 100 NJ
-preplace netloc FAN_OUT<net_container>system</net_container>(MASTER)cpu.irq,(SLAVE)jtag.irq,(SLAVE)btn_pio.irq,(SLAVE)sys_clk_timer.irq) 1 2 1 760
-preplace netloc FAN_OUT<net_container>system</net_container>(SLAVE)frame_buffer.clk1,(MASTER)clk138.clk,(SLAVE)sys_clk_timer.clk,(SLAVE)jtag.clk,(SLAVE)cpu.clk,(SLAVE)btn_pio.clk,(SLAVE)memory.clk1) 1 1 2 280 340 740
-preplace netloc INTERCONNECT<net_container>system</net_container>(MASTER)clk138.clk_reset,(SLAVE)memory.reset1,(SLAVE)frame_buffer.reset1,(SLAVE)jtag.reset,(MASTER)cpu.debug_reset_request,(SLAVE)sys_clk_timer.reset,(SLAVE)btn_pio.reset,(SLAVE)cpu.reset) 1 1 2 300 680 720
+preplace netloc EXPORT<net_container>system</net_container>(SLAVE)clk138.clk_in_reset,(SLAVE)system.reset) 1 0 1 NJ
+preplace netloc FAN_OUT<net_container>system</net_container>(SLAVE)sys_clk_timer.clk,(SLAVE)btn_pio.clk,(SLAVE)frame_buffer.clk1,(SLAVE)memory.clk1,(SLAVE)jtag.clk,(MASTER)clk138.clk,(SLAVE)cpu.clk) 1 1 2 280 340 740
+preplace netloc INTERCONNECT<net_container>system</net_container>(SLAVE)cpu.reset,(SLAVE)frame_buffer.reset1,(SLAVE)memory.reset1,(SLAVE)sys_clk_timer.reset,(SLAVE)jtag.reset,(MASTER)cpu.debug_reset_request,(SLAVE)btn_pio.reset,(MASTER)clk138.clk_reset) 1 1 2 300 680 720
+preplace netloc INTERCONNECT<net_container>system</net_container>(SLAVE)memory.s1,(SLAVE)cpu.debug_mem_slave,(MASTER)cpu.instruction_master,(SLAVE)sys_clk_timer.s1,(MASTER)cpu.data_master,(SLAVE)frame_buffer.s1,(SLAVE)jtag.avalon_jtag_slave,(SLAVE)btn_pio.s1) 1 1 2 320 700 700
+preplace netloc FAN_OUT<net_container>system</net_container>(SLAVE)btn_pio.irq,(MASTER)cpu.irq,(SLAVE)jtag.irq,(SLAVE)sys_clk_timer.irq) 1 2 1 760
 preplace netloc EXPORT<net_container>system</net_container>(SLAVE)system.clk,(SLAVE)clk138.clk_in) 1 0 1 NJ
-preplace netloc EXPORT<net_container>system</net_container>(SLAVE)system.btn_pio,(SLAVE)btn_pio.external_connection) 1 0 3 NJ 660 NJ 660 NJ
-preplace netloc EXPORT<net_container>system</net_container>(SLAVE)system.reset,(SLAVE)clk138.clk_in_reset) 1 0 1 NJ
+preplace netloc EXPORT<net_container>system</net_container>(SLAVE)btn_pio.external_connection,(SLAVE)system.btn_pio) 1 0 3 NJ 660 NJ 660 NJ
+preplace netloc EXPORT<net_container>system</net_container>(SLAVE)frame_buffer.s2,(SLAVE)system.frame_buf) 1 0 3 NJ 100 NJ 100 NJ
 levelinfo -pg 1 0 70 980
 levelinfo -hier system 80 110 460 820 970

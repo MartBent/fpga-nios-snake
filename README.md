@@ -3,6 +3,10 @@ This project is about the implementation of a snake game on a FPGA board, the bo
 
 http://www.ee.ic.ac.uk/pcheung/teaching/ee2_digital/de1-soc_user_manual.pdf
 
+Playing snake on a VGA monitor
+
+![Snake](https://i.imgur.com/IClmkOl.gif)
+
 The snake game is implemented by using several components. These components can either be made of out software, hardware, or synthesized from VHDL.
 
 An overview of the components:
